@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.17"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Flexiv RDK: Class Members</title>
+<title>RDK: Class Members</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -27,10 +27,12 @@
 <table cellspacing="0" cellpadding="0">
  <tbody>
  <tr style="height: 56px;">
+  <td id="projectlogo"><img alt="Logo" src="flexiv_logo.png"/></td>
   <td id="projectalign" style="padding-left: 0.5em;">
-   <div id="projectname">Flexiv RDK
-   &#160;<span id="projectnumber">0.2.0</span>
+   <div id="projectname">RDK
+   &#160;<span id="projectnumber">0.3.0</span>
    </div>
+   <div id="projectbrief">C++ APIs</div>
   </td>
  </tr>
  </tbody>
@@ -92,6 +94,9 @@ $(function() {
 <li>enable()
 : <a class="el" href="classflexiv_1_1_robot.html#ad71ab6fe7c6321bfe847e7ee695fa857">flexiv::Robot</a>
 </li>
+<li>error()
+: <a class="el" href="classflexiv_1_1_log.html#ac2e9a784da1b98c85ba1d5f29f0bb2c4">flexiv::Log</a>
+</li>
 <li>executePlanByIndex()
 : <a class="el" href="classflexiv_1_1_robot.html#aa41d3fc395078a8373d90a0b106ea52a">flexiv::Robot</a>
 </li>
@@ -104,31 +109,27 @@ $(function() {
 </ul>
 
 
-<h3><a id="index_f"></a>- f -</h3><ul>
-<li>Frame
-: <a class="el" href="classflexiv_1_1_model.html#a2a00a36eb576bf0230b1f16ccd1cfe7d">flexiv::Model</a>
-</li>
-</ul>
-
-
 <h3><a id="index_g"></a>- g -</h3><ul>
 <li>getCoriolisForce()
 : <a class="el" href="classflexiv_1_1_model.html#aaa784766b208613e39af908788af7241">flexiv::Model</a>
+</li>
+<li>getCoriolisMatrix()
+: <a class="el" href="classflexiv_1_1_model.html#a9ea0e2410d994ee82b83b0ecc74ff99d">flexiv::Model</a>
 </li>
 <li>getGravityForce()
 : <a class="el" href="classflexiv_1_1_model.html#ae5c293acdd3d81223bb9fce7f6de2446">flexiv::Model</a>
 </li>
 <li>getJacobian()
-: <a class="el" href="classflexiv_1_1_model.html#aa19f8202fa844ba60c1ebdb76bd3fda0">flexiv::Model</a>
+: <a class="el" href="classflexiv_1_1_model.html#a96b26bcf82c86bf1d929675342ed3aca">flexiv::Model</a>
 </li>
 <li>getJacobianDot()
-: <a class="el" href="classflexiv_1_1_model.html#afd86acd8db3137e6b17ab69888a02e3a">flexiv::Model</a>
+: <a class="el" href="classflexiv_1_1_model.html#ac5b0801ee1c91f326ef304a4b69032d2">flexiv::Model</a>
 </li>
 <li>getMassMatrix()
 : <a class="el" href="classflexiv_1_1_model.html#a835cdcbf7bac185f61404421b9c3ae2c">flexiv::Model</a>
 </li>
 <li>getMode()
-: <a class="el" href="classflexiv_1_1_robot.html#a16df8d5aa02ebc52de5c3361bf88d8f8">flexiv::Robot</a>
+: <a class="el" href="classflexiv_1_1_robot.html#ae8b83dbabfc1ba19655d7cadbfa86cf7">flexiv::Robot</a>
 </li>
 <li>getPlanInfo()
 : <a class="el" href="classflexiv_1_1_robot.html#ac8f8e2b246809573bd555f87e087b567">flexiv::Robot</a>
@@ -146,14 +147,18 @@ $(function() {
 
 
 <h3><a id="index_i"></a>- i -</h3><ul>
+<li>info()
+: <a class="el" href="classflexiv_1_1_log.html#aa49e1b267d12e57ac625105aa8be7ecb">flexiv::Log</a>
+</li>
 <li>init()
 : <a class="el" href="classflexiv_1_1_robot.html#ac0fba7a9e8adee9c68e6e4e71b5c60d0">flexiv::Robot</a>
+, <a class="el" href="classflexiv_1_1_visualization.html#a5a95d57764718afd853def1254832d02">flexiv::Visualization</a>
 </li>
 <li>isConnected()
 : <a class="el" href="classflexiv_1_1_robot.html#a64cfe3baea1cb6d1f3b628cb8438684a">flexiv::Robot</a>
 </li>
 <li>isFault()
-: <a class="el" href="classflexiv_1_1_robot.html#a229ccfc8603a5d35caa935a4509df515">flexiv::Robot</a>
+: <a class="el" href="classflexiv_1_1_robot.html#a7b1900ffcf67efc4ed43b266c8398939">flexiv::Robot</a>
 </li>
 <li>isOperational()
 : <a class="el" href="classflexiv_1_1_robot.html#acda60c1dcae9cfa0e64f50c761b93b3e">flexiv::Robot</a>
@@ -162,7 +167,7 @@ $(function() {
 : <a class="el" href="classflexiv_1_1_robot.html#a3719efe201c1096e2a644f16a38c582d">flexiv::Robot</a>
 </li>
 <li>isStopped()
-: <a class="el" href="classflexiv_1_1_robot.html#af6b183a3f8a4da296ec6128a50b61fcc">flexiv::Robot</a>
+: <a class="el" href="classflexiv_1_1_robot.html#a6b1916355692daca775dbb8433507700">flexiv::Robot</a>
 </li>
 </ul>
 
@@ -181,6 +186,12 @@ $(function() {
 <li>m_camPose
 : <a class="el" href="structflexiv_1_1_robot_states.html#a8d0b4a8c52d2c1c45431ec73e0c1ea53">flexiv::RobotStates</a>
 </li>
+<li>m_dq
+: <a class="el" href="structflexiv_1_1_robot_states.html#a03620bc78526bd6464b830d2abef0e67">flexiv::RobotStates</a>
+</li>
+<li>m_dtheta
+: <a class="el" href="structflexiv_1_1_robot_states.html#ab7abbb76ddb5c0b38edd5688696aa2df">flexiv::RobotStates</a>
+</li>
 <li>m_emergencyStop
 : <a class="el" href="structflexiv_1_1_system_status.html#a22ddd461bffb68c538db98429f17146c">flexiv::SystemStatus</a>
 </li>
@@ -193,23 +204,17 @@ $(function() {
 <li>m_externalActive
 : <a class="el" href="structflexiv_1_1_system_status.html#a38e65f4a459240efa1692988dbe6fa5d">flexiv::SystemStatus</a>
 </li>
+<li>m_extForceInBaseFrame
+: <a class="el" href="structflexiv_1_1_robot_states.html#a9eeed35416bb361da3bb7295d6657cc1">flexiv::RobotStates</a>
+</li>
+<li>m_extForceInTcpFrame
+: <a class="el" href="structflexiv_1_1_robot_states.html#a6508cbdec95aeade3fd3d32da793387e">flexiv::RobotStates</a>
+</li>
 <li>m_flangePose
 : <a class="el" href="structflexiv_1_1_robot_states.html#af6080d62753afc157cbb4779e4dee5ce">flexiv::RobotStates</a>
 </li>
 <li>m_jntLimitTriggered
 : <a class="el" href="structflexiv_1_1_system_status.html#a097a04068f3c79dfac05e0037f180ff4">flexiv::SystemStatus</a>
-</li>
-<li>m_linkPosition
-: <a class="el" href="structflexiv_1_1_robot_states.html#a8e3a59bd42fc59efdffe71fe1646d933">flexiv::RobotStates</a>
-</li>
-<li>m_linkTorque
-: <a class="el" href="structflexiv_1_1_robot_states.html#a3e3d0d3b23033879787f716d5c63e6a3">flexiv::RobotStates</a>
-</li>
-<li>m_linkTorqueExt
-: <a class="el" href="structflexiv_1_1_robot_states.html#add07204951ef55a8c1355ded5527ff28">flexiv::RobotStates</a>
-</li>
-<li>m_linkVelocity
-: <a class="el" href="structflexiv_1_1_robot_states.html#a31cb9c98d0fede486d90089a055e578b">flexiv::RobotStates</a>
 </li>
 <li>m_motionCmdSuccessRate
 : <a class="el" href="structflexiv_1_1_system_status.html#a6bbaf7c38be4236e445b487ce171175f">flexiv::SystemStatus</a>
@@ -238,23 +243,38 @@ $(function() {
 <li>m_ptStates
 : <a class="el" href="structflexiv_1_1_system_status.html#a592cd9b2ba4cdfbbc36208373cc360e8">flexiv::SystemStatus</a>
 </li>
+<li>m_q
+: <a class="el" href="structflexiv_1_1_robot_states.html#a5a48ce66396094d134816c0e2203011b">flexiv::RobotStates</a>
+</li>
 <li>m_reachedReady
 : <a class="el" href="structflexiv_1_1_system_status.html#aad5306ffad20105cc53c37b270b88435">flexiv::SystemStatus</a>
 </li>
 <li>m_reachedTarget
 : <a class="el" href="structflexiv_1_1_system_status.html#ab8aeaa7620bdb11850ae1ab3d6037afe">flexiv::SystemStatus</a>
 </li>
-<li>m_tcpAcc
-: <a class="el" href="structflexiv_1_1_robot_states.html#a3029b3e950f73fc1b99a820e685c8eaf">flexiv::RobotStates</a>
+<li>m_tau
+: <a class="el" href="structflexiv_1_1_robot_states.html#ace6b1ec0e141c7916b41cbcb84a816ea">flexiv::RobotStates</a>
+</li>
+<li>m_tauDes
+: <a class="el" href="structflexiv_1_1_robot_states.html#a2b13a856222b5308ba060412294f4eae">flexiv::RobotStates</a>
+</li>
+<li>m_tauDot
+: <a class="el" href="structflexiv_1_1_robot_states.html#a7ea7c087c08509da439d8e9926d5e04d">flexiv::RobotStates</a>
+</li>
+<li>m_tauExt
+: <a class="el" href="structflexiv_1_1_robot_states.html#aee50f1bab5e127ffb13ff96c437a909c">flexiv::RobotStates</a>
 </li>
 <li>m_tcpPose
 : <a class="el" href="structflexiv_1_1_robot_states.html#a43b50a9f19df0d43887e9d335ed8217b">flexiv::RobotStates</a>
 </li>
+<li>m_tcpPoseDes
+: <a class="el" href="structflexiv_1_1_robot_states.html#a7b05b346384a6ffba8c9bc70d912db93">flexiv::RobotStates</a>
+</li>
 <li>m_tcpVel
 : <a class="el" href="structflexiv_1_1_robot_states.html#a295cf36463d8570e23917e968ece2757">flexiv::RobotStates</a>
 </li>
-<li>m_tcpWrench
-: <a class="el" href="structflexiv_1_1_robot_states.html#a2ea53768a147f5723fd810ca68185725">flexiv::RobotStates</a>
+<li>m_theta
+: <a class="el" href="structflexiv_1_1_robot_states.html#ad20f001d25641563136d820b67e36fa5">flexiv::RobotStates</a>
 </li>
 <li>m_velocityScale
 : <a class="el" href="structflexiv_1_1_plan_info.html#acb9ecf10c99085b719e2102795ea417d">flexiv::PlanInfo</a>
@@ -308,6 +328,9 @@ $(function() {
 
 
 <h3><a id="index_u"></a>- u -</h3><ul>
+<li>update()
+: <a class="el" href="classflexiv_1_1_visualization.html#acb5b5443de642ed605850f7bf882c5d1">flexiv::Visualization</a>
+</li>
 <li>updateModel()
 : <a class="el" href="classflexiv_1_1_model.html#ad0544a580703ea19d946d7de3cea7c03">flexiv::Model</a>
 </li>
@@ -315,6 +338,9 @@ $(function() {
 
 
 <h3><a id="index_w"></a>- w -</h3><ul>
+<li>warn()
+: <a class="el" href="classflexiv_1_1_log.html#a4074ec4125c96c32cac33a4e0aed28cc">flexiv::Log</a>
+</li>
 <li>writeDigitalOutput()
 : <a class="el" href="classflexiv_1_1_robot.html#aabcf52cc45717498f7729553442d81be">flexiv::Robot</a>
 </li>

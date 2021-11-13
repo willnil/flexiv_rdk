@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.17"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Flexiv RDK: flexiv::RobotStates Struct Reference</title>
+<title>RDK: flexiv::RobotStates Struct Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -27,10 +27,12 @@
 <table cellspacing="0" cellpadding="0">
  <tbody>
  <tr style="height: 56px;">
+  <td id="projectlogo"><img alt="Logo" src="flexiv_logo.png"/></td>
   <td id="projectalign" style="padding-left: 0.5em;">
-   <div id="projectname">Flexiv RDK
-   &#160;<span id="projectnumber">0.2.0</span>
+   <div id="projectname">RDK
+   &#160;<span id="projectnumber">0.3.0</span>
    </div>
+   <div id="projectbrief">C++ APIs</div>
   </td>
  </tr>
  </tbody>
@@ -81,55 +83,76 @@ $(function() {
 </div><!--header-->
 <div class="contents">
 
-<p>Joint and cartesian-level robot states.  
+<p>Data struct containing the joint- and Cartesian-space robot states.  
  <a href="structflexiv_1_1_robot_states.html#details">More...</a></p>
 
 <p><code>#include &lt;<a class="el" href="_robot_states_8hpp_source.html">RobotStates.hpp</a>&gt;</code></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-attribs"></a>
 Public Attributes</h2></td></tr>
-<tr class="memitem:a8e3a59bd42fc59efdffe71fe1646d933"><td class="memItemLeft" align="right" valign="top"><a id="a8e3a59bd42fc59efdffe71fe1646d933"></a>
-std::vector&lt; double &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structflexiv_1_1_robot_states.html#a8e3a59bd42fc59efdffe71fe1646d933">m_linkPosition</a></td></tr>
-<tr class="memdesc:a8e3a59bd42fc59efdffe71fe1646d933"><td class="mdescLeft">&#160;</td><td class="mdescRight">\( \mathbb{R}^{Dof \times 1} \) measured link-side positions \( q~[rad] \) <br /></td></tr>
-<tr class="separator:a8e3a59bd42fc59efdffe71fe1646d933"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a31cb9c98d0fede486d90089a055e578b"><td class="memItemLeft" align="right" valign="top"><a id="a31cb9c98d0fede486d90089a055e578b"></a>
-std::vector&lt; double &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structflexiv_1_1_robot_states.html#a31cb9c98d0fede486d90089a055e578b">m_linkVelocity</a></td></tr>
-<tr class="memdesc:a31cb9c98d0fede486d90089a055e578b"><td class="mdescLeft">&#160;</td><td class="mdescRight">\( \mathbb{R}^{Dof \times 1} \) measured link-side velocities \( \dot{q}~[rad/s] \) <br /></td></tr>
-<tr class="separator:a31cb9c98d0fede486d90089a055e578b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a3e3d0d3b23033879787f716d5c63e6a3"><td class="memItemLeft" align="right" valign="top"><a id="a3e3d0d3b23033879787f716d5c63e6a3"></a>
-std::vector&lt; double &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structflexiv_1_1_robot_states.html#a3e3d0d3b23033879787f716d5c63e6a3">m_linkTorque</a></td></tr>
-<tr class="memdesc:a3e3d0d3b23033879787f716d5c63e6a3"><td class="mdescLeft">&#160;</td><td class="mdescRight">\( \mathbb{R}^{Dof \times 1} \) measured link-side torques \( \tau_{J}~[Nm] \) <br /></td></tr>
-<tr class="separator:a3e3d0d3b23033879787f716d5c63e6a3"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:add07204951ef55a8c1355ded5527ff28"><td class="memItemLeft" align="right" valign="top"><a id="add07204951ef55a8c1355ded5527ff28"></a>
-std::vector&lt; double &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structflexiv_1_1_robot_states.html#add07204951ef55a8c1355ded5527ff28">m_linkTorqueExt</a></td></tr>
-<tr class="memdesc:add07204951ef55a8c1355ded5527ff28"><td class="mdescLeft">&#160;</td><td class="mdescRight">\( \mathbb{R}^{Dof \times 1} \) estimated external link-side torques \( \hat \tau_{ext}~[Nm] \) <br /></td></tr>
-<tr class="separator:add07204951ef55a8c1355ded5527ff28"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5a48ce66396094d134816c0e2203011b"><td class="memItemLeft" align="right" valign="top"><a id="a5a48ce66396094d134816c0e2203011b"></a>
+std::vector&lt; double &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structflexiv_1_1_robot_states.html#a5a48ce66396094d134816c0e2203011b">m_q</a></td></tr>
+<tr class="memdesc:a5a48ce66396094d134816c0e2203011b"><td class="mdescLeft">&#160;</td><td class="mdescRight">\( \mathbb{R}^{Dof \times 1} \) measured link-side joint positions \( q~[rad] \) <br /></td></tr>
+<tr class="separator:a5a48ce66396094d134816c0e2203011b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad20f001d25641563136d820b67e36fa5"><td class="memItemLeft" align="right" valign="top"><a id="ad20f001d25641563136d820b67e36fa5"></a>
+std::vector&lt; double &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structflexiv_1_1_robot_states.html#ad20f001d25641563136d820b67e36fa5">m_theta</a></td></tr>
+<tr class="memdesc:ad20f001d25641563136d820b67e36fa5"><td class="mdescLeft">&#160;</td><td class="mdescRight">\( \mathbb{R}^{Dof \times 1} \) measured motor-side joint positions \( \theta~[rad] \) <br /></td></tr>
+<tr class="separator:ad20f001d25641563136d820b67e36fa5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a03620bc78526bd6464b830d2abef0e67"><td class="memItemLeft" align="right" valign="top"><a id="a03620bc78526bd6464b830d2abef0e67"></a>
+std::vector&lt; double &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structflexiv_1_1_robot_states.html#a03620bc78526bd6464b830d2abef0e67">m_dq</a></td></tr>
+<tr class="memdesc:a03620bc78526bd6464b830d2abef0e67"><td class="mdescLeft">&#160;</td><td class="mdescRight">\( \mathbb{R}^{Dof \times 1} \) measured link-side joint velocities \( \dot{q}~[rad/s] \) <br /></td></tr>
+<tr class="separator:a03620bc78526bd6464b830d2abef0e67"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab7abbb76ddb5c0b38edd5688696aa2df"><td class="memItemLeft" align="right" valign="top"><a id="ab7abbb76ddb5c0b38edd5688696aa2df"></a>
+std::vector&lt; double &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structflexiv_1_1_robot_states.html#ab7abbb76ddb5c0b38edd5688696aa2df">m_dtheta</a></td></tr>
+<tr class="memdesc:ab7abbb76ddb5c0b38edd5688696aa2df"><td class="mdescLeft">&#160;</td><td class="mdescRight">\( \mathbb{R}^{Dof \times 1} \) measured motor-side joint velocities \( \dot{\theta}~[rad/s] \) <br /></td></tr>
+<tr class="separator:ab7abbb76ddb5c0b38edd5688696aa2df"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ace6b1ec0e141c7916b41cbcb84a816ea"><td class="memItemLeft" align="right" valign="top"><a id="ace6b1ec0e141c7916b41cbcb84a816ea"></a>
+std::vector&lt; double &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structflexiv_1_1_robot_states.html#ace6b1ec0e141c7916b41cbcb84a816ea">m_tau</a></td></tr>
+<tr class="memdesc:ace6b1ec0e141c7916b41cbcb84a816ea"><td class="mdescLeft">&#160;</td><td class="mdescRight">\( \mathbb{R}^{Dof \times 1} \) measured joint torques \( \tau~[Nm] \) <br /></td></tr>
+<tr class="separator:ace6b1ec0e141c7916b41cbcb84a816ea"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2b13a856222b5308ba060412294f4eae"><td class="memItemLeft" align="right" valign="top"><a id="a2b13a856222b5308ba060412294f4eae"></a>
+std::vector&lt; double &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structflexiv_1_1_robot_states.html#a2b13a856222b5308ba060412294f4eae">m_tauDes</a></td></tr>
+<tr class="memdesc:a2b13a856222b5308ba060412294f4eae"><td class="mdescLeft">&#160;</td><td class="mdescRight">\( \mathbb{R}^{Dof \times 1} \) desired joint torques \( \tau_{d}~[Nm] \) <br /></td></tr>
+<tr class="separator:a2b13a856222b5308ba060412294f4eae"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7ea7c087c08509da439d8e9926d5e04d"><td class="memItemLeft" align="right" valign="top"><a id="a7ea7c087c08509da439d8e9926d5e04d"></a>
+std::vector&lt; double &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structflexiv_1_1_robot_states.html#a7ea7c087c08509da439d8e9926d5e04d">m_tauDot</a></td></tr>
+<tr class="memdesc:a7ea7c087c08509da439d8e9926d5e04d"><td class="mdescLeft">&#160;</td><td class="mdescRight">\( \mathbb{R}^{Dof \times 1} \) numerical derivative of joint torques \( \dot{\tau}~[Nm/s] \) <br /></td></tr>
+<tr class="separator:a7ea7c087c08509da439d8e9926d5e04d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aee50f1bab5e127ffb13ff96c437a909c"><td class="memItemLeft" align="right" valign="top"><a id="aee50f1bab5e127ffb13ff96c437a909c"></a>
+std::vector&lt; double &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structflexiv_1_1_robot_states.html#aee50f1bab5e127ffb13ff96c437a909c">m_tauExt</a></td></tr>
+<tr class="memdesc:aee50f1bab5e127ffb13ff96c437a909c"><td class="mdescLeft">&#160;</td><td class="mdescRight">\( \mathbb{R}^{Dof \times 1} \) estimated external joint torques \( \hat \tau_{ext}~[Nm] \) <br /></td></tr>
+<tr class="separator:aee50f1bab5e127ffb13ff96c437a909c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a43b50a9f19df0d43887e9d335ed8217b"><td class="memItemLeft" align="right" valign="top">std::vector&lt; double &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structflexiv_1_1_robot_states.html#a43b50a9f19df0d43887e9d335ed8217b">m_tcpPose</a></td></tr>
-<tr class="memdesc:a43b50a9f19df0d43887e9d335ed8217b"><td class="mdescLeft">&#160;</td><td class="mdescRight">\( \mathbb{R}^{7 \times 1} \) current TCP pose in base frame  <a href="structflexiv_1_1_robot_states.html#a43b50a9f19df0d43887e9d335ed8217b">More...</a><br /></td></tr>
+<tr class="memdesc:a43b50a9f19df0d43887e9d335ed8217b"><td class="mdescLeft">&#160;</td><td class="mdescRight">\( \mathbb{R}^{7 \times 1} \) measured TCP pose in base frame  <a href="structflexiv_1_1_robot_states.html#a43b50a9f19df0d43887e9d335ed8217b">More...</a><br /></td></tr>
 <tr class="separator:a43b50a9f19df0d43887e9d335ed8217b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7b05b346384a6ffba8c9bc70d912db93"><td class="memItemLeft" align="right" valign="top">std::vector&lt; double &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structflexiv_1_1_robot_states.html#a7b05b346384a6ffba8c9bc70d912db93">m_tcpPoseDes</a></td></tr>
+<tr class="memdesc:a7b05b346384a6ffba8c9bc70d912db93"><td class="mdescLeft">&#160;</td><td class="mdescRight">\( \mathbb{R}^{7 \times 1} \) desired TCP pose in base frame  <a href="structflexiv_1_1_robot_states.html#a7b05b346384a6ffba8c9bc70d912db93">More...</a><br /></td></tr>
+<tr class="separator:a7b05b346384a6ffba8c9bc70d912db93"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a295cf36463d8570e23917e968ece2757"><td class="memItemLeft" align="right" valign="top">std::vector&lt; double &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structflexiv_1_1_robot_states.html#a295cf36463d8570e23917e968ece2757">m_tcpVel</a></td></tr>
-<tr class="memdesc:a295cf36463d8570e23917e968ece2757"><td class="mdescLeft">&#160;</td><td class="mdescRight">\( \mathbb{R}^{6 \times 1} \) current TCP velocity in base frame  <a href="structflexiv_1_1_robot_states.html#a295cf36463d8570e23917e968ece2757">More...</a><br /></td></tr>
+<tr class="memdesc:a295cf36463d8570e23917e968ece2757"><td class="mdescLeft">&#160;</td><td class="mdescRight">\( \mathbb{R}^{6 \times 1} \) measured TCP velocity in base frame  <a href="structflexiv_1_1_robot_states.html#a295cf36463d8570e23917e968ece2757">More...</a><br /></td></tr>
 <tr class="separator:a295cf36463d8570e23917e968ece2757"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a3029b3e950f73fc1b99a820e685c8eaf"><td class="memItemLeft" align="right" valign="top">std::vector&lt; double &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structflexiv_1_1_robot_states.html#a3029b3e950f73fc1b99a820e685c8eaf">m_tcpAcc</a></td></tr>
-<tr class="memdesc:a3029b3e950f73fc1b99a820e685c8eaf"><td class="mdescLeft">&#160;</td><td class="mdescRight">\( \mathbb{R}^{6 \times 1} \) current TCP acceleration in base frame  <a href="structflexiv_1_1_robot_states.html#a3029b3e950f73fc1b99a820e685c8eaf">More...</a><br /></td></tr>
-<tr class="separator:a3029b3e950f73fc1b99a820e685c8eaf"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8d0b4a8c52d2c1c45431ec73e0c1ea53"><td class="memItemLeft" align="right" valign="top">std::vector&lt; double &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structflexiv_1_1_robot_states.html#a8d0b4a8c52d2c1c45431ec73e0c1ea53">m_camPose</a></td></tr>
-<tr class="memdesc:a8d0b4a8c52d2c1c45431ec73e0c1ea53"><td class="mdescLeft">&#160;</td><td class="mdescRight">\( \mathbb{R}^{7 \times 1} \) current camera pose in base frame  <a href="structflexiv_1_1_robot_states.html#a8d0b4a8c52d2c1c45431ec73e0c1ea53">More...</a><br /></td></tr>
+<tr class="memdesc:a8d0b4a8c52d2c1c45431ec73e0c1ea53"><td class="mdescLeft">&#160;</td><td class="mdescRight">\( \mathbb{R}^{7 \times 1} \) measured camera pose in base frame  <a href="structflexiv_1_1_robot_states.html#a8d0b4a8c52d2c1c45431ec73e0c1ea53">More...</a><br /></td></tr>
 <tr class="separator:a8d0b4a8c52d2c1c45431ec73e0c1ea53"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af6080d62753afc157cbb4779e4dee5ce"><td class="memItemLeft" align="right" valign="top">std::vector&lt; double &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structflexiv_1_1_robot_states.html#af6080d62753afc157cbb4779e4dee5ce">m_flangePose</a></td></tr>
-<tr class="memdesc:af6080d62753afc157cbb4779e4dee5ce"><td class="mdescLeft">&#160;</td><td class="mdescRight">\( \mathbb{R}^{7 \times 1} \) current flange pose in base frame  <a href="structflexiv_1_1_robot_states.html#af6080d62753afc157cbb4779e4dee5ce">More...</a><br /></td></tr>
+<tr class="memdesc:af6080d62753afc157cbb4779e4dee5ce"><td class="mdescLeft">&#160;</td><td class="mdescRight">\( \mathbb{R}^{7 \times 1} \) measured flange pose in base frame  <a href="structflexiv_1_1_robot_states.html#af6080d62753afc157cbb4779e4dee5ce">More...</a><br /></td></tr>
 <tr class="separator:af6080d62753afc157cbb4779e4dee5ce"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2858150789d4590c2235779d22356567"><td class="memItemLeft" align="right" valign="top">std::vector&lt; double &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structflexiv_1_1_robot_states.html#a2858150789d4590c2235779d22356567">m_endLinkPose</a></td></tr>
-<tr class="memdesc:a2858150789d4590c2235779d22356567"><td class="mdescLeft">&#160;</td><td class="mdescRight">\( \mathbb{R}^{7 \times 1} \) current pose of the last link  <a href="structflexiv_1_1_robot_states.html#a2858150789d4590c2235779d22356567">More...</a><br /></td></tr>
+<tr class="memdesc:a2858150789d4590c2235779d22356567"><td class="mdescLeft">&#160;</td><td class="mdescRight">\( \mathbb{R}^{7 \times 1} \) measured pose of the last link in base frame  <a href="structflexiv_1_1_robot_states.html#a2858150789d4590c2235779d22356567">More...</a><br /></td></tr>
 <tr class="separator:a2858150789d4590c2235779d22356567"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a2ea53768a147f5723fd810ca68185725"><td class="memItemLeft" align="right" valign="top">std::vector&lt; double &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structflexiv_1_1_robot_states.html#a2ea53768a147f5723fd810ca68185725">m_tcpWrench</a></td></tr>
-<tr class="memdesc:a2ea53768a147f5723fd810ca68185725"><td class="mdescLeft">&#160;</td><td class="mdescRight">\( \mathbb{R}^{6 \times 1} \) current external wrench applied on tool in TCP frame  <a href="structflexiv_1_1_robot_states.html#a2ea53768a147f5723fd810ca68185725">More...</a><br /></td></tr>
-<tr class="separator:a2ea53768a147f5723fd810ca68185725"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6508cbdec95aeade3fd3d32da793387e"><td class="memItemLeft" align="right" valign="top">std::vector&lt; double &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structflexiv_1_1_robot_states.html#a6508cbdec95aeade3fd3d32da793387e">m_extForceInTcpFrame</a></td></tr>
+<tr class="memdesc:a6508cbdec95aeade3fd3d32da793387e"><td class="mdescLeft">&#160;</td><td class="mdescRight">\( \mathbb{R}^{6 \times 1} \) estimated external force vector applied on TCP in TCP frame  <a href="structflexiv_1_1_robot_states.html#a6508cbdec95aeade3fd3d32da793387e">More...</a><br /></td></tr>
+<tr class="separator:a6508cbdec95aeade3fd3d32da793387e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9eeed35416bb361da3bb7295d6657cc1"><td class="memItemLeft" align="right" valign="top">std::vector&lt; double &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structflexiv_1_1_robot_states.html#a9eeed35416bb361da3bb7295d6657cc1">m_extForceInBaseFrame</a></td></tr>
+<tr class="memdesc:a9eeed35416bb361da3bb7295d6657cc1"><td class="mdescLeft">&#160;</td><td class="mdescRight">\( \mathbb{R}^{6 \times 1} \) estimated external force vector applied on TCP in the base frame  <a href="structflexiv_1_1_robot_states.html#a9eeed35416bb361da3bb7295d6657cc1">More...</a><br /></td></tr>
+<tr class="separator:a9eeed35416bb361da3bb7295d6657cc1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>Joint and cartesian-level robot states. </p>
+<div class="textblock"><p>Data struct containing the joint- and Cartesian-space robot states. </p>
+<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="display_robot_states_8cpp-example.html#_a0">display_robot_states.cpp</a>.</dd>
+</dl>
 
-<p class="definition">Definition at line <a class="el" href="_robot_states_8hpp_source.html#l00080">80</a> of file <a class="el" href="_robot_states_8hpp_source.html">RobotStates.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_robot_states_8hpp_source.html#l00019">19</a> of file <a class="el" href="_robot_states_8hpp_source.html">RobotStates.hpp</a>.</p>
 </div><h2 class="groupheader">Member Data Documentation</h2>
 <a id="a8d0b4a8c52d2c1c45431ec73e0c1ea53"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a8d0b4a8c52d2c1c45431ec73e0c1ea53">&#9670;&nbsp;</a></span>m_camPose</h2>
@@ -143,10 +166,10 @@ std::vector&lt; double &gt;&#160;</td><td class="memItemRight" valign="bottom"><
       </table>
 </div><div class="memdoc">
 
-<p>\( \mathbb{R}^{7 \times 1} \) current camera pose in base frame </p>
+<p>\( \mathbb{R}^{7 \times 1} \) measured camera pose in base frame </p>
 <dl class="section note"><dt>Note</dt><dd>\( \mathbb{R}^{3 \times 1} \) position and \( \mathbb{R}^{4 \times 1} \) quaternion \( [x, y, z, q_w, q_x, q_y, q_z]^T \) </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="_robot_states_8hpp_source.html#l00136">136</a> of file <a class="el" href="_robot_states_8hpp_source.html">RobotStates.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_robot_states_8hpp_source.html#l00097">97</a> of file <a class="el" href="_robot_states_8hpp_source.html">RobotStates.hpp</a>.</p>
 
 </div>
 </div>
@@ -162,10 +185,48 @@ std::vector&lt; double &gt;&#160;</td><td class="memItemRight" valign="bottom"><
       </table>
 </div><div class="memdoc">
 
-<p>\( \mathbb{R}^{7 \times 1} \) current pose of the last link </p>
+<p>\( \mathbb{R}^{7 \times 1} \) measured pose of the last link in base frame </p>
 <dl class="section note"><dt>Note</dt><dd>\( \mathbb{R}^{3 \times 1} \) position and \( \mathbb{R}^{4 \times 1} \) quaternion \( [x, y, z, q_w, q_x, q_y, q_z]^T \) </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="_robot_states_8hpp_source.html#l00150">150</a> of file <a class="el" href="_robot_states_8hpp_source.html">RobotStates.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_robot_states_8hpp_source.html#l00112">112</a> of file <a class="el" href="_robot_states_8hpp_source.html">RobotStates.hpp</a>.</p>
+
+</div>
+</div>
+<a id="a9eeed35416bb361da3bb7295d6657cc1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9eeed35416bb361da3bb7295d6657cc1">&#9670;&nbsp;</a></span>m_extForceInBaseFrame</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::vector&lt;double&gt; flexiv::RobotStates::m_extForceInBaseFrame</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>\( \mathbb{R}^{6 \times 1} \) estimated external force vector applied on TCP in the base frame </p>
+<dl class="section note"><dt>Note</dt><dd>\( \mathbb{R}^{3 \times 1} \) force and \( \mathbb{R}^{3 \times 1} \) moment \( [f_x, f_y, f_z, m_x, m_y, m_z]^T \) </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="_robot_states_8hpp_source.html#l00128">128</a> of file <a class="el" href="_robot_states_8hpp_source.html">RobotStates.hpp</a>.</p>
+
+</div>
+</div>
+<a id="a6508cbdec95aeade3fd3d32da793387e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6508cbdec95aeade3fd3d32da793387e">&#9670;&nbsp;</a></span>m_extForceInTcpFrame</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::vector&lt;double&gt; flexiv::RobotStates::m_extForceInTcpFrame</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>\( \mathbb{R}^{6 \times 1} \) estimated external force vector applied on TCP in TCP frame </p>
+<dl class="section note"><dt>Note</dt><dd>\( \mathbb{R}^{3 \times 1} \) force and \( \mathbb{R}^{3 \times 1} \) moment \( [f_x, f_y, f_z, m_x, m_y, m_z]^T \) </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="_robot_states_8hpp_source.html#l00120">120</a> of file <a class="el" href="_robot_states_8hpp_source.html">RobotStates.hpp</a>.</p>
 
 </div>
 </div>
@@ -181,31 +242,10 @@ std::vector&lt; double &gt;&#160;</td><td class="memItemRight" valign="bottom"><
       </table>
 </div><div class="memdoc">
 
-<p>\( \mathbb{R}^{7 \times 1} \) current flange pose in base frame </p>
+<p>\( \mathbb{R}^{7 \times 1} \) measured flange pose in base frame </p>
 <dl class="section note"><dt>Note</dt><dd>\( \mathbb{R}^{3 \times 1} \) position and \( \mathbb{R}^{4 \times 1} \) quaternion \( [x, y, z, q_w, q_x, q_y, q_z]^T \) </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="_robot_states_8hpp_source.html#l00143">143</a> of file <a class="el" href="_robot_states_8hpp_source.html">RobotStates.hpp</a>.</p>
-
-</div>
-</div>
-<a id="a3029b3e950f73fc1b99a820e685c8eaf"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a3029b3e950f73fc1b99a820e685c8eaf">&#9670;&nbsp;</a></span>m_tcpAcc</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">std::vector&lt;double&gt; flexiv::RobotStates::m_tcpAcc</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>\( \mathbb{R}^{6 \times 1} \) current TCP acceleration in base frame </p>
-<dl class="section note"><dt>Note</dt><dd>\( \mathbb{R}^{3 \times 1} \) linear acceleration and \( \mathbb{R}^{3 \times 1} \) angular acceleration \( [a_x, a_y, a_z, \alpha_x, \alpha_y, \alpha_z]^T \) </dd>
-<dd>
-To be deprecated </dd></dl>
-
-<p class="definition">Definition at line <a class="el" href="_robot_states_8hpp_source.html#l00129">129</a> of file <a class="el" href="_robot_states_8hpp_source.html">RobotStates.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_robot_states_8hpp_source.html#l00104">104</a> of file <a class="el" href="_robot_states_8hpp_source.html">RobotStates.hpp</a>.</p>
 
 </div>
 </div>
@@ -221,10 +261,29 @@ To be deprecated </dd></dl>
       </table>
 </div><div class="memdoc">
 
-<p>\( \mathbb{R}^{7 \times 1} \) current TCP pose in base frame </p>
+<p>\( \mathbb{R}^{7 \times 1} \) measured TCP pose in base frame </p>
 <dl class="section note"><dt>Note</dt><dd>\( \mathbb{R}^{3 \times 1} \) position and \( \mathbb{R}^{4 \times 1} \) quaternion \( [x, y, z, q_w, q_x, q_y, q_z]^T \) </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="_robot_states_8hpp_source.html#l00111">111</a> of file <a class="el" href="_robot_states_8hpp_source.html">RobotStates.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_robot_states_8hpp_source.html#l00074">74</a> of file <a class="el" href="_robot_states_8hpp_source.html">RobotStates.hpp</a>.</p>
+
+</div>
+</div>
+<a id="a7b05b346384a6ffba8c9bc70d912db93"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7b05b346384a6ffba8c9bc70d912db93">&#9670;&nbsp;</a></span>m_tcpPoseDes</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::vector&lt;double&gt; flexiv::RobotStates::m_tcpPoseDes</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>\( \mathbb{R}^{7 \times 1} \) desired TCP pose in base frame </p>
+<dl class="section note"><dt>Note</dt><dd>\( \mathbb{R}^{3 \times 1} \) position and \( \mathbb{R}^{4 \times 1} \) quaternion \( [x, y, z, q_w, q_x, q_y, q_z]^T \) </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="_robot_states_8hpp_source.html#l00081">81</a> of file <a class="el" href="_robot_states_8hpp_source.html">RobotStates.hpp</a>.</p>
 
 </div>
 </div>
@@ -240,29 +299,10 @@ To be deprecated </dd></dl>
       </table>
 </div><div class="memdoc">
 
-<p>\( \mathbb{R}^{6 \times 1} \) current TCP velocity in base frame </p>
+<p>\( \mathbb{R}^{6 \times 1} \) measured TCP velocity in base frame </p>
 <dl class="section note"><dt>Note</dt><dd>\( \mathbb{R}^{3 \times 1} \) linear velocity and \( \mathbb{R}^{3 \times 1} \) angular velocity \( [v_x, v_y, v_z, \omega_x, \omega_y, \omega_z]^T \) </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="_robot_states_8hpp_source.html#l00119">119</a> of file <a class="el" href="_robot_states_8hpp_source.html">RobotStates.hpp</a>.</p>
-
-</div>
-</div>
-<a id="a2ea53768a147f5723fd810ca68185725"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a2ea53768a147f5723fd810ca68185725">&#9670;&nbsp;</a></span>m_tcpWrench</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">std::vector&lt;double&gt; flexiv::RobotStates::m_tcpWrench</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>\( \mathbb{R}^{6 \times 1} \) current external wrench applied on tool in TCP frame </p>
-<dl class="section note"><dt>Note</dt><dd>\( \mathbb{R}^{3 \times 1} \) force and \( \mathbb{R}^{3 \times 1} \) moment \( [f_x, f_y, f_z, m_x, m_y, m_z]^T \) </dd></dl>
-
-<p class="definition">Definition at line <a class="el" href="_robot_states_8hpp_source.html#l00158">158</a> of file <a class="el" href="_robot_states_8hpp_source.html">RobotStates.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_robot_states_8hpp_source.html#l00090">90</a> of file <a class="el" href="_robot_states_8hpp_source.html">RobotStates.hpp</a>.</p>
 
 </div>
 </div>

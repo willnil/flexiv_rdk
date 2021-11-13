@@ -1,12 +1,13 @@
 <map id="include/Robot.hpp" name="include/Robot.hpp">
-<area shape="rect" id="node1" title=" " alt="" coords="281,5,420,32"/>
-<area shape="rect" id="node2" title=" " alt="" coords="401,155,463,181"/>
-<area shape="rect" id="node3" title=" " alt="" coords="5,155,83,181"/>
-<area shape="rect" id="node4" title=" " alt="" coords="197,80,283,107"/>
-<area shape="rect" id="node5" title=" " alt="" coords="307,80,394,107"/>
-<area shape="rect" id="node6" href="$_robot_states_8hpp.html" title=" " alt="" coords="581,80,710,107"/>
-<area shape="rect" id="node8" href="$_mode_8hpp.html" title=" " alt="" coords="470,80,557,107"/>
-<area shape="rect" id="node9" href="$_model_8hpp.html" title=" " alt="" coords="81,80,172,107"/>
-<area shape="rect" id="node7" title=" " alt="" coords="616,155,675,181"/>
-<area shape="rect" id="node10" title=" " alt="" coords="107,155,205,181"/>
+<area shape="rect" id="node1" title=" " alt="" coords="338,5,477,32"/>
+<area shape="rect" id="node2" title=" " alt="" coords="189,155,252,181"/>
+<area shape="rect" id="node3" title=" " alt="" coords="399,155,477,181"/>
+<area shape="rect" id="node4" title=" " alt="" coords="445,80,532,107"/>
+<area shape="rect" id="node5" title=" " alt="" coords="556,80,643,107"/>
+<area shape="rect" id="node6" href="$_robot_states_8hpp.html" title=" " alt="" coords="73,80,203,107"/>
+<area shape="rect" id="node9" href="$_mode_8hpp.html" title=" " alt="" coords="667,80,753,107"/>
+<area shape="rect" id="node10" href="$_model_8hpp.html" title=" " alt="" coords="279,80,370,107"/>
+<area shape="rect" id="node7" title=" " alt="" coords="106,155,165,181"/>
+<area shape="rect" id="node8" title=" " alt="" coords="5,155,81,181"/>
+<area shape="rect" id="node11" title=" " alt="" coords="277,155,375,181"/>
 </map>

@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['writedigitaloutput_128',['writeDigitalOutput',['../classflexiv_1_1_robot.html#aabcf52cc45717498f7729553442d81be',1,'flexiv::Robot']]]
+  ['update_149',['update',['../classflexiv_1_1_visualization.html#acb5b5443de642ed605850f7bf882c5d1',1,'flexiv::Visualization']]],
+  ['updatemodel_150',['updateModel',['../classflexiv_1_1_model.html#ad0544a580703ea19d946d7de3cea7c03',1,'flexiv::Model']]]
 ];

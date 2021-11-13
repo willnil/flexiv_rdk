@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.17"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Flexiv RDK: Flexiv RDK</title>
+<title>RDK: Flexiv RDK</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -27,10 +27,12 @@
 <table cellspacing="0" cellpadding="0">
  <tbody>
  <tr style="height: 56px;">
+  <td id="projectlogo"><img alt="Logo" src="flexiv_logo.png"/></td>
   <td id="projectalign" style="padding-left: 0.5em;">
-   <div id="projectname">Flexiv RDK
-   &#160;<span id="projectnumber">0.2.0</span>
+   <div id="projectname">RDK
+   &#160;<span id="projectnumber">0.3.0</span>
    </div>
+   <div id="projectbrief">C++ APIs</div>
   </td>
  </tr>
  </tbody>
@@ -83,19 +85,27 @@ $(function() {
 <h1>Build and run the examples</h1>
 <p><b>NOTE:</b> the following is only a quick reference, assuming you've already gone through Flexiv RDK Manual.</p>
 <ol type="1">
-<li>Configure CMake: <pre class="fragment"> cd flexiv_rdk
+<li>Configure and build example programs: <pre class="fragment"> cd flexiv_rdk
  mkdir build &amp;&amp; cd build
  cmake ..
-</pre></li>
-<li>Update <code>LOCAL_IP</code> in <code>include/config.h</code> with the actual IP address of your workstation PC in the same subnet with the robot.</li>
-<li>Build example programs: <pre class="fragment"> cd flexiv_rdk/build
- make
+ make -j4
 </pre></li>
 <li>The compiled program binaries will be output to <code>flexiv_rdk/build/example</code></li>
 <li>Assuming the robot is booted and connected, to run an example program: <pre class="fragment"> cd flexiv_rdk/build/example
- sudo ./&lt;program_name&gt;
-</pre> </li>
+ sudo ./&lt;program_name&gt; &lt;robot_ip&gt; &lt;local_ip&gt;
+</pre></li>
 </ol>
+<h1>Integrated visualization</h1>
+<p>Flexiv RDK has integrated visualization based on Meshcat. To use it, follow instructions below.</p>
+<ol type="1">
+<li>Install Meshcat server using <code>pip</code>: <pre class="fragment"> pip install meshcat
+</pre></li>
+<li>Start the Meshcat server in Terminal: <pre class="fragment"> meshcat-server
+</pre></li>
+<li>It will provide several URLs, open <code>web_url</code> with a web browser. An empty scene will open up.</li>
+<li>Use APIs in <code><a class="el" href="classflexiv_1_1_visualization.html" title="Integrated lightweight visualization based on Meshcat.">flexiv::Visualization</a></code> to communicate with the Meshcat server, the empty scene will be populated with robot(s) and user-defined objects if any. Refer to <code><a class="el" href="visualization_8cpp_source.html">example/visualization.cpp</a></code>.</li>
+</ol>
+<p><b>Note:</b> only STL mesh files are supported, which are provided in <code>spec/meshes</code>. </p>
 </div></div><!-- PageDoc -->
 </div><!-- contents -->
 <!-- start footer part -->

@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.17"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Flexiv RDK: flexiv::SystemStatus Struct Reference</title>
+<title>RDK: flexiv::SystemStatus Struct Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -27,10 +27,12 @@
 <table cellspacing="0" cellpadding="0">
  <tbody>
  <tr style="height: 56px;">
+  <td id="projectlogo"><img alt="Logo" src="flexiv_logo.png"/></td>
   <td id="projectalign" style="padding-left: 0.5em;">
-   <div id="projectname">Flexiv RDK
-   &#160;<span id="projectnumber">0.2.0</span>
+   <div id="projectname">RDK
+   &#160;<span id="projectnumber">0.3.0</span>
    </div>
+   <div id="projectbrief">C++ APIs</div>
   </td>
  </tr>
  </tbody>
@@ -81,7 +83,7 @@ $(function() {
 </div><!--header-->
 <div class="contents">
 
-<p>Status of the system.  
+<p>Data struct containing status of the robot system.  
  <a href="structflexiv_1_1_system_status.html#details">More...</a></p>
 
 <p><code>#include &lt;<a class="el" href="_robot_states_8hpp_source.html">RobotStates.hpp</a>&gt;</code></p>
@@ -99,7 +101,7 @@ Public Attributes</h2></td></tr>
 <tr class="separator:abef7cf75c1e2645aafa185171585c58b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a05ae5341d67d7f3e51fe9bf498713fcd"><td class="memItemLeft" align="right" valign="top"><a id="a05ae5341d67d7f3e51fe9bf498713fcd"></a>
 bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structflexiv_1_1_system_status.html#a05ae5341d67d7f3e51fe9bf498713fcd">m_programRunning</a></td></tr>
-<tr class="memdesc:a05ae5341d67d7f3e51fe9bf498713fcd"><td class="mdescLeft">&#160;</td><td class="mdescRight">If a plan or primitive is currently running. <br /></td></tr>
+<tr class="memdesc:a05ae5341d67d7f3e51fe9bf498713fcd"><td class="mdescLeft">&#160;</td><td class="mdescRight">If a plan is currently running. <br /></td></tr>
 <tr class="separator:a05ae5341d67d7f3e51fe9bf498713fcd"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aad5306ffad20105cc53c37b270b88435"><td class="memItemLeft" align="right" valign="top"><a id="aad5306ffad20105cc53c37b270b88435"></a>
 bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structflexiv_1_1_system_status.html#aad5306ffad20105cc53c37b270b88435">m_reachedReady</a></td></tr>
@@ -127,9 +129,11 @@ std::vector&lt; std::string &gt;&#160;</td><td class="memItemRight" valign="bott
 <tr class="separator:a592cd9b2ba4cdfbbc36208373cc360e8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>Status of the system. </p>
+<div class="textblock"><p>Data struct containing status of the robot system. </p>
+<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="keyboard_move_tcp_8cpp-example.html#_a0">keyboard_move_tcp.cpp</a>, <a class="el" href="plan_execution_8cpp-example.html#_a3">plan_execution.cpp</a>, <a class="el" href="primitive_execution_8cpp-example.html#_a1">primitive_execution.cpp</a>, and <a class="el" href="robot_dynamics_8cpp-example.html#_a4">robot_dynamics.cpp</a>.</dd>
+</dl>
 
-<p class="definition">Definition at line <a class="el" href="_robot_states_8hpp_source.html#l00018">18</a> of file <a class="el" href="_robot_states_8hpp_source.html">RobotStates.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_robot_states_8hpp_source.html#l00145">145</a> of file <a class="el" href="_robot_states_8hpp_source.html">RobotStates.hpp</a>.</p>
 </div><h2 class="groupheader">Member Data Documentation</h2>
 <a id="a22ddd461bffb68c538db98429f17146c"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a22ddd461bffb68c538db98429f17146c">&#9670;&nbsp;</a></span>m_emergencyStop</h2>
@@ -146,7 +150,7 @@ std::vector&lt; std::string &gt;&#160;</td><td class="memItemRight" valign="bott
 <p>Emergency stop state. </p>
 <dl class="section note"><dt>Note</dt><dd>True: E-stop released, false: E-stop pressed </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="_robot_states_8hpp_source.html#l00024">24</a> of file <a class="el" href="_robot_states_8hpp_source.html">RobotStates.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_robot_states_8hpp_source.html#l00151">151</a> of file <a class="el" href="_robot_states_8hpp_source.html">RobotStates.hpp</a>.</p>
 
 </div>
 </div>
@@ -165,7 +169,7 @@ std::vector&lt; std::string &gt;&#160;</td><td class="memItemRight" valign="bott
 <p>External active state. </p>
 <dl class="section note"><dt>Note</dt><dd>True: robot executing user commands, false: robot waiting for user commands </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="_robot_states_8hpp_source.html#l00031">31</a> of file <a class="el" href="_robot_states_8hpp_source.html">RobotStates.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_robot_states_8hpp_source.html#l00158">158</a> of file <a class="el" href="_robot_states_8hpp_source.html">RobotStates.hpp</a>.</p>
 
 </div>
 </div>
@@ -184,7 +188,7 @@ std::vector&lt; std::string &gt;&#160;</td><td class="memItemRight" valign="bott
 <p>If user can send program request. </p>
 <dl class="section note"><dt>Note</dt><dd>True: server can take new plan/primitive request from the client </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="_robot_states_8hpp_source.html#l00037">37</a> of file <a class="el" href="_robot_states_8hpp_source.html">RobotStates.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_robot_states_8hpp_source.html#l00164">164</a> of file <a class="el" href="_robot_states_8hpp_source.html">RobotStates.hpp</a>.</p>
 
 </div>
 </div>
