@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['update_148',['update',['../classflexiv_1_1_visualization.html#acb5b5443de642ed605850f7bf882c5d1',1,'flexiv::Visualization']]],
-  ['updatemodel_149',['updateModel',['../classflexiv_1_1_model.html#ad0544a580703ea19d946d7de3cea7c03',1,'flexiv::Model']]]
+  ['warn_156',['warn',['../classflexiv_1_1_log.html#a4074ec4125c96c32cac33a4e0aed28cc',1,'flexiv::Log']]],
+  ['writedigitaloutput_157',['writeDigitalOutput',['../classflexiv_1_1_robot.html#aabcf52cc45717498f7729553442d81be',1,'flexiv::Robot']]]
 ];

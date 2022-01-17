@@ -30,7 +30,7 @@
   <td id="projectlogo"><img alt="Logo" src="flexiv_logo.png"/></td>
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">RDK
-   &#160;<span id="projectnumber">0.3.1</span>
+   &#160;<span id="projectnumber">0.4.0</span>
    </div>
    <div id="projectbrief">C++ APIs</div>
   </td>
@@ -76,14 +76,16 @@ $(function() {
 </div><!--header-->
 <div class="contents">
 <div class="textblock"><p><object type="image/svg+xml" data="https://github.com/flexivrobotics/flexiv_rdk/actions/workflows/cmake.yml/badge.svg" style="pointer-events: none;">CMake Badge</object> <a href="https://opensource.org/licenses/Apache-2.0"><object type="image/svg+xml" data="https://img.shields.io/badge/License-Apache%202.0-blue.svg" style="pointer-events: none;">License</object></a></p>
-<p>Flexiv Robot Development Kit (RDK) is a C++ library for creating powerful real-time applications with Flexiv robots.</p>
+<p>Flexiv RDK (Robot Development Kit) is a powerful toolkit as an add-on to the Flexiv software platform. It enables the users to create complex applications with APIs that provide low-level real-time access to the robot.</p>
+<p><b>C++</b> interface (real-time and non-real-time APIs) and <b>Python</b> interface (non-real-time APIs only) are supported.</p>
 <h1>License</h1>
 <p>Flexiv RDK is licensed under the <a href="https://www.apache.org/licenses/LICENSE-2.0.html">Apache 2.0 license</a>.</p>
 <h1>References</h1>
-<p>Please refer to <b><a href="https://flexivrobotics.github.io/">Flexiv RDK Manual</a></b> on how to properly set up the system and use Flexiv RDK library.</p>
-<p>For details about the APIs, please refer to the <a href="https://flexivrobotics.github.io/flexiv_rdk/">Doxygen generated API documentation</a>.</p>
-<h1>Build and run the examples</h1>
-<p><b>NOTE:</b> the following is only a quick reference, assuming you've already gone through Flexiv RDK Manual.</p>
+<p><b><a href="https://flexivrobotics.github.io/">Flexiv RDK Manual</a></b> is the main reference and contains important information on how to properly set up the system and use Flexiv RDK library.</p>
+<p><a href="https://flexivrobotics.github.io/flexiv_rdk/">API documentation</a> contains details about available APIs, generated from Doxygen.</p>
+<h1>Run example programs</h1>
+<p><b>NOTE:</b> the instruction below is only a quick reference, assuming you've already gone through the Flexiv RDK Manual.</p>
+<h2>C++ interface</h2>
 <ol type="1">
 <li>Configure and build example programs: <pre class="fragment"> cd flexiv_rdk
  mkdir build &amp;&amp; cd build
@@ -91,12 +93,21 @@ $(function() {
  make -j4
 </pre></li>
 <li>The compiled program binaries will be output to <code>flexiv_rdk/build/example</code></li>
-<li>Assuming the robot is booted and connected, to run an example program: <pre class="fragment"> cd flexiv_rdk/build/example
- sudo ./&lt;program_name&gt; &lt;robot_ip&gt; &lt;local_ip&gt;
+<li>Assume the robot is booted and connected, to run an example program: <pre class="fragment"> cd flexiv_rdk/build/example
+ sudo ./&lt;program_name&gt; &lt;robot_ip&gt; &lt;local_ip&gt; &lt;...&gt;
+</pre></li>
+</ol>
+<h2>Python interface</h2>
+<p><b>NOTE:</b> Python 3.8 is required to use this interface, see Flexiv RDK Manual for more details.</p>
+<ol type="1">
+<li>Make sure your Python version is 3.8.x: <pre class="fragment"> python3 --version
+</pre></li>
+<li>Assume the robot is booted and connected, to run an example program: <pre class="fragment"> cd flexiv_rdk/example_py
+ sudo python3 &lt;program_name&gt;.py &lt;robot_ip&gt; &lt;local_ip&gt; &lt;...&gt;
 </pre></li>
 </ol>
 <h1>Integrated visualization</h1>
-<p>Flexiv RDK has integrated visualization based on Meshcat. To use it, follow instructions below.</p>
+<p>Flexiv RDK has integrated visualization (only available for C++ interface) based on Meshcat. To use this feature:</p>
 <ol type="1">
 <li>Install Meshcat server using <code>pip</code>: <pre class="fragment"> pip install meshcat
 </pre></li>

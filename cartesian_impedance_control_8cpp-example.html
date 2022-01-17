@@ -30,7 +30,7 @@
   <td id="projectlogo"><img alt="Logo" src="flexiv_logo.png"/></td>
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">RDK
-   &#160;<span id="projectnumber">0.3.1</span>
+   &#160;<span id="projectnumber">0.4.0</span>
    </div>
    <div id="projectbrief">C++ APIs</div>
   </td>
@@ -75,7 +75,7 @@ $(function() {
 <div class="title">cartesian_impedance_control.cpp</div>  </div>
 </div><!--header-->
 <div class="contents">
-<p>Run Cartesian impedance control to hold or sine-sweep the robot TCP. </p><dl class="section copyright"><dt>Copyright</dt><dd>(C) 2016-2021 Flexiv Ltd. All Rights Reserved. </dd></dl>
+<p>Run Cartesian impedance control to hold or sine-sweep the robot TCP. </p><dl class="section copyright"><dt>Copyright</dt><dd>Copyright (C) 2016-2021 Flexiv Ltd. All Rights Reserved. </dd></dl>
 <dl class="section author"><dt>Author</dt><dd>Flexiv</dd></dl>
 <div class="fragment"><div class="line"> </div>
 <div class="line"><span class="preprocessor">#include &lt;<a class="code" href="_robot_8hpp.html">Robot.hpp</a>&gt;</span></div>
@@ -87,28 +87,20 @@ $(function() {
 <div class="line"> </div>
 <div class="line"><span class="keyword">namespace </span>{</div>
 <div class="line"> </div>
-<div class="line"><span class="comment">// size of Cartesian pose vector [position 3x1 + rotation (quaternion) 4x1 ]</span></div>
 <div class="line"><span class="keyword">const</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> k_cartPoseSize = 7;</div>
 <div class="line"> </div>
-<div class="line"><span class="comment">// RT loop period [sec]</span></div>
 <div class="line"><span class="keyword">const</span> <span class="keywordtype">double</span> k_loopPeiord = 0.001;</div>
 <div class="line"> </div>
-<div class="line"><span class="comment">// TCP sine-sweep amplitude [m]</span></div>
 <div class="line"><span class="keyword">const</span> <span class="keywordtype">double</span> k_swingAmp = 0.1;</div>
 <div class="line"> </div>
-<div class="line"><span class="comment">// TCP sine-sweep frequency [Hz]</span></div>
 <div class="line"><span class="keyword">const</span> <span class="keywordtype">double</span> k_swingFreq = 0.3;</div>
 <div class="line"> </div>
-<div class="line"><span class="comment">// initial Cartesian-space pose (position + rotation) of robot TCP</span></div>
 <div class="line">std::vector&lt;double&gt; g_initTcpPose;</div>
 <div class="line"> </div>
-<div class="line"><span class="comment">// current Cartesian-space pose (position + rotation) of robot TCP</span></div>
 <div class="line">std::vector&lt;double&gt; g_currentTcpPose;</div>
 <div class="line"> </div>
-<div class="line"><span class="comment">// flag whether initial Cartesian position is set</span></div>
 <div class="line"><span class="keywordtype">bool</span> g_isInitPoseSet = <span class="keyword">false</span>;</div>
 <div class="line"> </div>
-<div class="line"><span class="comment">// loop counter</span></div>
 <div class="line"><span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> g_loopCounter = 0;</div>
 <div class="line">}</div>
 <div class="line"> </div>
@@ -120,20 +112,19 @@ $(function() {
 <div class="line">    std::cout &lt;&lt; std::endl;</div>
 <div class="line">}</div>
 <div class="line"> </div>
-<div class="line"><span class="comment">// callback function for realtime periodic task</span></div>
 <div class="line"><span class="keywordtype">void</span> periodicTask(std::shared_ptr&lt;flexiv::RobotStates&gt; robotStates,</div>
 <div class="line">    std::shared_ptr&lt;flexiv::Robot&gt; robot, std::string motionType)</div>
 <div class="line">{</div>
-<div class="line">    <span class="comment">// read robot states</span></div>
+<div class="line">    <span class="comment">// Read robot states</span></div>
 <div class="line">    robot-&gt;getRobotStates(robotStates.get());</div>
 <div class="line"> </div>
-<div class="line">    <span class="comment">// use target TCP velocity and acceleration = 0</span></div>
+<div class="line">    <span class="comment">// Use target TCP velocity and acceleration = 0</span></div>
 <div class="line">    std::vector&lt;double&gt; tcpVel(6, 0);</div>
 <div class="line">    std::vector&lt;double&gt; tcpAcc(6, 0);</div>
 <div class="line"> </div>
-<div class="line">    <span class="comment">// set initial TCP pose</span></div>
+<div class="line">    <span class="comment">// Set initial TCP pose</span></div>
 <div class="line">    <span class="keywordflow">if</span> (!g_isInitPoseSet) {</div>
-<div class="line">        <span class="comment">// check vector size before saving</span></div>
+<div class="line">        <span class="comment">// Check vector size before saving</span></div>
 <div class="line">        <span class="keywordflow">if</span> (robotStates-&gt;m_tcpPose.size() == k_cartPoseSize) {</div>
 <div class="line">            g_initTcpPose = robotStates-&gt;m_tcpPose;</div>
 <div class="line">            g_currentTcpPose = g_initTcpPose;</div>
@@ -143,9 +134,9 @@ $(function() {
 <div class="line">            printVector(g_initTcpPose);</div>
 <div class="line">        }</div>
 <div class="line">    }</div>
-<div class="line">    <span class="comment">// run control only after initial pose is set</span></div>
+<div class="line">    <span class="comment">// Run control only after initial pose is set</span></div>
 <div class="line">    <span class="keywordflow">else</span> {</div>
-<div class="line">        <span class="comment">// set target position based on motion type</span></div>
+<div class="line">        <span class="comment">// Set target position based on motion type</span></div>
 <div class="line">        <span class="keywordflow">if</span> (motionType == <span class="stringliteral">&quot;hold&quot;</span>) {</div>
 <div class="line">            robot-&gt;streamTcpPose(g_initTcpPose, tcpVel, tcpAcc);</div>
 <div class="line">        } <span class="keywordflow">else</span> <span class="keywordflow">if</span> (motionType == <span class="stringliteral">&quot;sine-sweep&quot;</span>) {</div>
@@ -166,12 +157,12 @@ $(function() {
 <div class="line"> </div>
 <div class="line"><span class="keywordtype">int</span> main(<span class="keywordtype">int</span> argc, <span class="keywordtype">char</span>* argv[])</div>
 <div class="line">{</div>
-<div class="line">    <span class="comment">// log object for printing message with timestamp and coloring</span></div>
+<div class="line">    <span class="comment">// Log object for printing message with timestamp and coloring</span></div>
 <div class="line">    <a class="code" href="classflexiv_1_1_log.html">flexiv::Log</a> log;</div>
 <div class="line"> </div>
 <div class="line">    <span class="comment">// Parse Parameters</span></div>
 <div class="line">    <span class="comment">//=============================================================================</span></div>
-<div class="line">    <span class="comment">// check if program has 3 arguments</span></div>
+<div class="line">    <span class="comment">// Check if program has 3 arguments</span></div>
 <div class="line">    <span class="keywordflow">if</span> (argc != 4) {</div>
 <div class="line">        log.<a class="code" href="classflexiv_1_1_log.html#ac2e9a784da1b98c85ba1d5f29f0bb2c4">error</a>(</div>
 <div class="line">            <span class="stringliteral">&quot;Invalid program arguments. Usage: &lt;robot_ip&gt; &lt;local_ip&gt; &quot;</span></div>
@@ -185,51 +176,51 @@ $(function() {
 <div class="line">    <span class="comment">// IP of the workstation PC running this program</span></div>
 <div class="line">    std::string localIP = argv[2];</div>
 <div class="line"> </div>
-<div class="line">    <span class="comment">// type of motion specified by user</span></div>
+<div class="line">    <span class="comment">// Type of motion specified by user</span></div>
 <div class="line">    std::string motionType = argv[3];</div>
 <div class="line"> </div>
 <div class="line">    <span class="comment">// RDK Initialization</span></div>
 <div class="line">    <span class="comment">//=============================================================================</span></div>
-<div class="line">    <span class="comment">// instantiate robot interface</span></div>
+<div class="line">    <span class="comment">// Instantiate robot interface</span></div>
 <div class="line">    <span class="keyword">auto</span> robot = std::make_shared&lt;flexiv::Robot&gt;();</div>
 <div class="line"> </div>
-<div class="line">    <span class="comment">// create data struct for storing robot states</span></div>
+<div class="line">    <span class="comment">// Create data struct for storing robot states</span></div>
 <div class="line">    <span class="keyword">auto</span> robotStates = std::make_shared&lt;flexiv::RobotStates&gt;();</div>
 <div class="line"> </div>
-<div class="line">    <span class="comment">// initialize robot interface and connect to the robot server</span></div>
+<div class="line">    <span class="comment">// Initialize robot interface and connect to the robot server</span></div>
 <div class="line">    robot-&gt;init(robotIP, localIP);</div>
 <div class="line"> </div>
-<div class="line">    <span class="comment">// wait for the connection to be established</span></div>
+<div class="line">    <span class="comment">// Wait for the connection to be established</span></div>
 <div class="line">    <span class="keywordflow">do</span> {</div>
 <div class="line">        std::this_thread::sleep_for(std::chrono::milliseconds(1));</div>
 <div class="line">    } <span class="keywordflow">while</span> (!robot-&gt;isConnected());</div>
 <div class="line"> </div>
-<div class="line">    <span class="comment">// enable the robot, make sure the E-stop is released before enabling</span></div>
+<div class="line">    <span class="comment">// Enable the robot, make sure the E-stop is released before enabling</span></div>
 <div class="line">    <span class="keywordflow">if</span> (robot-&gt;enable()) {</div>
 <div class="line">        log.<a class="code" href="classflexiv_1_1_log.html#aa49e1b267d12e57ac625105aa8be7ecb">info</a>(<span class="stringliteral">&quot;Enabling robot ...&quot;</span>);</div>
 <div class="line">    }</div>
 <div class="line"> </div>
-<div class="line">    <span class="comment">// wait for the robot to become operational</span></div>
+<div class="line">    <span class="comment">// Wait for the robot to become operational</span></div>
 <div class="line">    <span class="keywordflow">do</span> {</div>
 <div class="line">        std::this_thread::sleep_for(std::chrono::milliseconds(1));</div>
 <div class="line">    } <span class="keywordflow">while</span> (!robot-&gt;isOperational());</div>
 <div class="line">    log.<a class="code" href="classflexiv_1_1_log.html#aa49e1b267d12e57ac625105aa8be7ecb">info</a>(<span class="stringliteral">&quot;Robot is now operational&quot;</span>);</div>
 <div class="line"> </div>
-<div class="line">    <span class="comment">// set mode after robot is operational</span></div>
+<div class="line">    <span class="comment">// Set mode after robot is operational</span></div>
 <div class="line">    robot-&gt;setMode(<a name="a3"></a>flexiv::MODE_CARTESIAN_IMPEDANCE);</div>
 <div class="line"> </div>
-<div class="line">    <span class="comment">// wait for the mode to be switched</span></div>
+<div class="line">    <span class="comment">// Wait for the mode to be switched</span></div>
 <div class="line">    <span class="keywordflow">do</span> {</div>
 <div class="line">        std::this_thread::sleep_for(std::chrono::milliseconds(1));</div>
 <div class="line">    } <span class="keywordflow">while</span> (robot-&gt;getMode() != flexiv::MODE_CARTESIAN_IMPEDANCE);</div>
 <div class="line"> </div>
-<div class="line">    <span class="comment">// choose the index of tool being used. No need to call this method if the</span></div>
+<div class="line">    <span class="comment">// Choose the index of tool being used. No need to call this method if the</span></div>
 <div class="line">    <span class="comment">// mounted tool on the robot has only one TCP, it&#39;ll be used by default</span></div>
 <div class="line">    robot-&gt;switchTcp(0);</div>
 <div class="line"> </div>
 <div class="line">    <span class="comment">// High-priority Realtime Periodic Task @ 1kHz</span></div>
 <div class="line">    <span class="comment">//=============================================================================</span></div>
-<div class="line">    <span class="comment">// this is a blocking method, so all other user-defined background threads</span></div>
+<div class="line">    <span class="comment">// This is a blocking method, so all other user-defined background threads</span></div>
 <div class="line">    <span class="comment">// should be spawned before this</span></div>
 <div class="line">    robot-&gt;start(std::bind(periodicTask, robotStates, robot, motionType));</div>
 <div class="line"> </div>

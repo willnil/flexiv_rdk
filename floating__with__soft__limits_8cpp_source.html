@@ -30,7 +30,7 @@
   <td id="projectlogo"><img alt="Logo" src="flexiv_logo.png"/></td>
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">RDK
-   &#160;<span id="projectnumber">0.3.1</span>
+   &#160;<span id="projectnumber">0.4.0</span>
    </div>
    <div id="projectbrief">C++ APIs</div>
   </td>
@@ -87,94 +87,92 @@ $(function() {
 <div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="preprocessor">#include &lt;thread&gt;</span></div>
 <div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160; </div>
 <div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;<span class="keyword">namespace </span>{</div>
-<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;<span class="comment">// robot DOF</span></div>
 <div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;<span class="keyword">const</span> <span class="keywordtype">int</span> k_robotDofs = 7;</div>
 <div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160; </div>
-<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;<span class="keyword">const</span> std::vector&lt;double&gt; k_floatingDamping</div>
-<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;    = {10.0, 10.0, 5.0, 5.0, 1.0, 1.0, 1.0};</div>
-<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;}</div>
-<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160; </div>
-<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;<span class="comment">// callback function for realtime periodic task</span></div>
-<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;<span class="keywordtype">void</span> periodicTask(std::shared_ptr&lt;flexiv::RobotStates&gt; robotStates,</div>
-<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;    std::shared_ptr&lt;flexiv::Robot&gt; robot)</div>
-<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;{</div>
-<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;    <span class="comment">// read robot states</span></div>
-<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;    robot-&gt;getRobotStates(robotStates.get());</div>
-<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160; </div>
-<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;    <span class="comment">// set 0 joint torques</span></div>
-<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;    std::vector&lt;double&gt; torqueDesired(k_robotDofs, 0.0);</div>
-<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160; </div>
-<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;    <span class="comment">// add some velocity damping</span></div>
-<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;    <span class="keywordflow">for</span> (<span class="keywordtype">size_t</span> i = 0; i &lt; k_robotDofs; ++i) {</div>
-<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;        torqueDesired[i] = -k_floatingDamping[i] * robotStates-&gt;m_dtheta[i];</div>
-<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;    }</div>
-<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160; </div>
-<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;    <span class="comment">// send target joint torque to RDK server, enable gravity compensation and</span></div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;    <span class="comment">// joint soft limits</span></div>
-<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;    robot-&gt;streamJointTorque(torqueDesired, <span class="keyword">true</span>, <span class="keyword">true</span>);</div>
-<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;}</div>
-<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160; </div>
-<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;<span class="keywordtype">int</span> main(<span class="keywordtype">int</span> argc, <span class="keywordtype">char</span>* argv[])</div>
-<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;{</div>
-<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;    <span class="comment">// log object for printing message with timestamp and coloring</span></div>
-<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;    <a class="code" href="classflexiv_1_1_log.html">flexiv::Log</a> log;</div>
-<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160; </div>
-<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;    <span class="comment">// Parse Parameters</span></div>
-<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;    <span class="comment">//=============================================================================</span></div>
-<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;    <span class="comment">// check if program has 3 arguments</span></div>
-<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;    <span class="keywordflow">if</span> (argc != 3) {</div>
-<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;        log.<a class="code" href="classflexiv_1_1_log.html#ac2e9a784da1b98c85ba1d5f29f0bb2c4">error</a>(<span class="stringliteral">&quot;Invalid program arguments. Usage: &lt;robot_ip&gt; &lt;local_ip&gt;&quot;</span>);</div>
-<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;        <span class="keywordflow">return</span> 0;</div>
-<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;    }</div>
-<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;    <span class="comment">// IP of the robot server</span></div>
-<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;    std::string robotIP = argv[1];</div>
-<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160; </div>
-<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;    <span class="comment">// IP of the workstation PC running this program</span></div>
-<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;    std::string localIP = argv[2];</div>
-<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160; </div>
-<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;    <span class="comment">// RDK Initialization</span></div>
-<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;    <span class="comment">//=============================================================================</span></div>
-<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;    <span class="comment">// instantiate robot interface</span></div>
-<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;    <span class="keyword">auto</span> robot = std::make_shared&lt;flexiv::Robot&gt;();</div>
-<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160; </div>
-<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;    <span class="comment">// create data struct for storing robot states</span></div>
-<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;    <span class="keyword">auto</span> robotStates = std::make_shared&lt;flexiv::RobotStates&gt;();</div>
-<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160; </div>
-<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;    <span class="comment">// initialize robot interface and connect to the robot server</span></div>
-<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;    robot-&gt;init(robotIP, localIP);</div>
-<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160; </div>
-<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;    <span class="comment">// wait for the connection to be established</span></div>
-<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;    <span class="keywordflow">do</span> {</div>
-<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;        std::this_thread::sleep_for(std::chrono::milliseconds(1));</div>
-<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;    } <span class="keywordflow">while</span> (!robot-&gt;isConnected());</div>
-<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160; </div>
-<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;    <span class="comment">// enable the robot, make sure the E-stop is released before enabling</span></div>
-<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;    <span class="keywordflow">if</span> (robot-&gt;enable()) {</div>
-<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;        log.<a class="code" href="classflexiv_1_1_log.html#aa49e1b267d12e57ac625105aa8be7ecb">info</a>(<span class="stringliteral">&quot;Enabling robot ...&quot;</span>);</div>
-<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;    }</div>
-<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160; </div>
-<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;    <span class="comment">// wait for the robot to become operational</span></div>
-<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;    <span class="keywordflow">do</span> {</div>
-<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;        std::this_thread::sleep_for(std::chrono::milliseconds(1));</div>
-<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;    } <span class="keywordflow">while</span> (!robot-&gt;isOperational());</div>
-<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;    log.<a class="code" href="classflexiv_1_1_log.html#aa49e1b267d12e57ac625105aa8be7ecb">info</a>(<span class="stringliteral">&quot;Robot is now operational&quot;</span>);</div>
-<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160; </div>
-<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;    <span class="comment">// set mode after robot is operational</span></div>
-<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;    robot-&gt;setMode(flexiv::MODE_JOINT_TORQUE);</div>
-<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160; </div>
-<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;    <span class="comment">// wait for the mode to be switched</span></div>
-<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;    <span class="keywordflow">do</span> {</div>
-<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;        std::this_thread::sleep_for(std::chrono::milliseconds(1));</div>
-<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;    } <span class="keywordflow">while</span> (robot-&gt;getMode() != flexiv::MODE_JOINT_TORQUE);</div>
-<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160; </div>
-<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;    <span class="comment">// High-priority Realtime Periodic Task @ 1kHz</span></div>
-<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;    <span class="comment">//=============================================================================</span></div>
-<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;    <span class="comment">// this is a blocking method, so all other user-defined background threads</span></div>
-<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;    <span class="comment">// should be spawned before this</span></div>
-<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;    robot-&gt;start(std::bind(periodicTask, robotStates, robot));</div>
-<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160; </div>
-<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;    <span class="keywordflow">return</span> 0;</div>
-<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;}</div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;<span class="keyword">const</span> std::vector&lt;double&gt; k_floatingDamping</div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;    = {10.0, 10.0, 5.0, 5.0, 1.0, 1.0, 1.0};</div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;}</div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160; </div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;<span class="keywordtype">void</span> periodicTask(std::shared_ptr&lt;flexiv::RobotStates&gt; robotStates,</div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;    std::shared_ptr&lt;flexiv::Robot&gt; robot)</div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;{</div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;    <span class="comment">// Read robot states</span></div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;    robot-&gt;getRobotStates(robotStates.get());</div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160; </div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;    <span class="comment">// Set 0 joint torques</span></div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;    std::vector&lt;double&gt; torqueDesired(k_robotDofs, 0.0);</div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160; </div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;    <span class="comment">// Add some velocity damping</span></div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;    <span class="keywordflow">for</span> (<span class="keywordtype">size_t</span> i = 0; i &lt; k_robotDofs; ++i) {</div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;        torqueDesired[i] = -k_floatingDamping[i] * robotStates-&gt;m_dtheta[i];</div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;    }</div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160; </div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;    <span class="comment">// Send target joint torque to RDK server, enable gravity compensation and</span></div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;    <span class="comment">// joint soft limits</span></div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;    robot-&gt;streamJointTorque(torqueDesired, <span class="keyword">true</span>, <span class="keyword">true</span>);</div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;}</div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160; </div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;<span class="keywordtype">int</span> main(<span class="keywordtype">int</span> argc, <span class="keywordtype">char</span>* argv[])</div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;{</div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;    <span class="comment">// Log object for printing message with timestamp and coloring</span></div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;    <a class="code" href="classflexiv_1_1_log.html">flexiv::Log</a> log;</div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160; </div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;    <span class="comment">// Parse Parameters</span></div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;    <span class="comment">//=============================================================================</span></div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;    <span class="comment">// Check if program has 3 arguments</span></div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;    <span class="keywordflow">if</span> (argc != 3) {</div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;        log.<a class="code" href="classflexiv_1_1_log.html#ac2e9a784da1b98c85ba1d5f29f0bb2c4">error</a>(<span class="stringliteral">&quot;Invalid program arguments. Usage: &lt;robot_ip&gt; &lt;local_ip&gt;&quot;</span>);</div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;        <span class="keywordflow">return</span> 0;</div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;    }</div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;    <span class="comment">// IP of the robot server</span></div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;    std::string robotIP = argv[1];</div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160; </div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;    <span class="comment">// IP of the workstation PC running this program</span></div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;    std::string localIP = argv[2];</div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160; </div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;    <span class="comment">// RDK Initialization</span></div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;    <span class="comment">//=============================================================================</span></div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;    <span class="comment">// Instantiate robot interface</span></div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;    <span class="keyword">auto</span> robot = std::make_shared&lt;flexiv::Robot&gt;();</div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160; </div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;    <span class="comment">// Create data struct for storing robot states</span></div>
+<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;    <span class="keyword">auto</span> robotStates = std::make_shared&lt;flexiv::RobotStates&gt;();</div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160; </div>
+<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;    <span class="comment">// Initialize robot interface and connect to the robot server</span></div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;    robot-&gt;init(robotIP, localIP);</div>
+<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160; </div>
+<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;    <span class="comment">// Wait for the connection to be established</span></div>
+<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;    <span class="keywordflow">do</span> {</div>
+<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;        std::this_thread::sleep_for(std::chrono::milliseconds(1));</div>
+<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;    } <span class="keywordflow">while</span> (!robot-&gt;isConnected());</div>
+<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160; </div>
+<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;    <span class="comment">// Enable the robot, make sure the E-stop is released before enabling</span></div>
+<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;    <span class="keywordflow">if</span> (robot-&gt;enable()) {</div>
+<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;        log.<a class="code" href="classflexiv_1_1_log.html#aa49e1b267d12e57ac625105aa8be7ecb">info</a>(<span class="stringliteral">&quot;Enabling robot ...&quot;</span>);</div>
+<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;    }</div>
+<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160; </div>
+<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;    <span class="comment">// Wait for the robot to become operational</span></div>
+<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;    <span class="keywordflow">do</span> {</div>
+<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;        std::this_thread::sleep_for(std::chrono::milliseconds(1));</div>
+<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;    } <span class="keywordflow">while</span> (!robot-&gt;isOperational());</div>
+<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;    log.<a class="code" href="classflexiv_1_1_log.html#aa49e1b267d12e57ac625105aa8be7ecb">info</a>(<span class="stringliteral">&quot;Robot is now operational&quot;</span>);</div>
+<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160; </div>
+<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;    <span class="comment">// Set mode after robot is operational</span></div>
+<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;    robot-&gt;setMode(flexiv::MODE_JOINT_TORQUE);</div>
+<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160; </div>
+<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;    <span class="comment">// Wait for the mode to be switched</span></div>
+<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;    <span class="keywordflow">do</span> {</div>
+<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;        std::this_thread::sleep_for(std::chrono::milliseconds(1));</div>
+<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;    } <span class="keywordflow">while</span> (robot-&gt;getMode() != flexiv::MODE_JOINT_TORQUE);</div>
+<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160; </div>
+<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;    <span class="comment">// High-priority Realtime Periodic Task @ 1kHz</span></div>
+<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;    <span class="comment">//=============================================================================</span></div>
+<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;    <span class="comment">// This is a blocking method, so all other user-defined background threads</span></div>
+<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;    <span class="comment">// should be spawned before this</span></div>
+<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;    robot-&gt;start(std::bind(periodicTask, robotStates, robot));</div>
+<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160; </div>
+<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;    <span class="keywordflow">return</span> 0;</div>
+<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;}</div>
 </div><!-- fragment --></div><!-- contents -->
 <div class="ttc" id="aclassflexiv_1_1_log_html_aa49e1b267d12e57ac625105aa8be7ecb"><div class="ttname"><a href="classflexiv_1_1_log.html#aa49e1b267d12e57ac625105aa8be7ecb">flexiv::Log::info</a></div><div class="ttdeci">void info(const std::string &amp;message) const</div><div class="ttdoc">Pprint info message with timestamp and coloring.</div></div>
 <div class="ttc" id="aclassflexiv_1_1_log_html"><div class="ttname"><a href="classflexiv_1_1_log.html">flexiv::Log</a></div><div class="ttdoc">Helper functions to print messages with timestamp and coloring. Logging raw data to csv file coming s...</div><div class="ttdef"><b>Definition:</b> <a href="_log_8hpp_source.html#l00018">Log.hpp:18</a></div></div>

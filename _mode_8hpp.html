@@ -30,7 +30,7 @@
   <td id="projectlogo"><img alt="Logo" src="flexiv_logo.png"/></td>
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">RDK
-   &#160;<span id="projectnumber">0.3.1</span>
+   &#160;<span id="projectnumber">0.4.0</span>
    </div>
    <div id="projectbrief">C++ APIs</div>
   </td>
@@ -116,12 +116,15 @@ Enumerations</h2></td></tr>
 <tr class="memitem:a0938f2444c0fa9050f9eb0008bd1a3e4"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_mode_8hpp.html#a0938f2444c0fa9050f9eb0008bd1a3e4">flexiv::Mode</a> { <br />
 &#160;&#160;<b>MODE_UNKNOWN</b> = -1, 
 <a class="el" href="_mode_8hpp.html#a0938f2444c0fa9050f9eb0008bd1a3e4a417a6bab3d6025a8f6b988a34be1f837">flexiv::MODE_IDLE</a>, 
-<a class="el" href="_mode_8hpp.html#a0938f2444c0fa9050f9eb0008bd1a3e4a75879fbbe308f1a49690128bd8d253cd">flexiv::MODE_JOINT_POSITION</a>, 
 <a class="el" href="_mode_8hpp.html#a0938f2444c0fa9050f9eb0008bd1a3e4a90cd6cd3ede99217b33cc4869e0ec2f9">flexiv::MODE_JOINT_TORQUE</a>, 
+<a class="el" href="_mode_8hpp.html#a0938f2444c0fa9050f9eb0008bd1a3e4a75879fbbe308f1a49690128bd8d253cd">flexiv::MODE_JOINT_POSITION</a>, 
 <br />
-&#160;&#160;<a class="el" href="_mode_8hpp.html#a0938f2444c0fa9050f9eb0008bd1a3e4ad55007e241808eee66359cfde88ba1d3">flexiv::MODE_PLAN_EXECUTION</a>, 
+&#160;&#160;<a class="el" href="_mode_8hpp.html#a0938f2444c0fa9050f9eb0008bd1a3e4a390f59cbaf64cb9d8a17c3ce3560e9fe">flexiv::MODE_JOINT_POSITION_NRT</a>, 
+<a class="el" href="_mode_8hpp.html#a0938f2444c0fa9050f9eb0008bd1a3e4ad55007e241808eee66359cfde88ba1d3">flexiv::MODE_PLAN_EXECUTION</a>, 
 <a class="el" href="_mode_8hpp.html#a0938f2444c0fa9050f9eb0008bd1a3e4a69424d24cc7afed19bc29f5a024b16fa">flexiv::MODE_PRIMITIVE_EXECUTION</a>, 
-<a class="el" href="_mode_8hpp.html#a0938f2444c0fa9050f9eb0008bd1a3e4a3a5245a2f5eda3a9378ad2e08b9125f6">flexiv::MODE_CARTESIAN_IMPEDANCE</a>
+<a class="el" href="_mode_8hpp.html#a0938f2444c0fa9050f9eb0008bd1a3e4a3a5245a2f5eda3a9378ad2e08b9125f6">flexiv::MODE_CARTESIAN_IMPEDANCE</a>, 
+<br />
+&#160;&#160;<a class="el" href="_mode_8hpp.html#a0938f2444c0fa9050f9eb0008bd1a3e4acf7e9d29f926352837a487afb170249d">flexiv::MODE_CARTESIAN_IMPEDANCE_NRT</a>
 <br />
  }</td></tr>
 <tr class="memdesc:a0938f2444c0fa9050f9eb0008bd1a3e4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Operation modes of the robot.  <a href="_mode_8hpp.html#a0938f2444c0fa9050f9eb0008bd1a3e4">More...</a><br /></td></tr>
@@ -149,20 +152,26 @@ Enumerations</h2></td></tr>
 <tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a id="a0938f2444c0fa9050f9eb0008bd1a3e4a417a6bab3d6025a8f6b988a34be1f837"></a>MODE_IDLE&#160;</td><td class="fielddoc"><p>The robot holds position and waits for commands. </p>
 <dl class="section note"><dt>Note</dt><dd>This is the default mode upon initialization </dd></dl>
 </td></tr>
-<tr><td class="fieldname"><a id="a0938f2444c0fa9050f9eb0008bd1a3e4a75879fbbe308f1a49690128bd8d253cd"></a>MODE_JOINT_POSITION&#160;</td><td class="fielddoc"><p>Joint position control. </p>
-<dl class="section note"><dt>Note</dt><dd>Real-time control mode running at 1kHz </dd></dl>
+<tr><td class="fieldname"><a id="a0938f2444c0fa9050f9eb0008bd1a3e4a90cd6cd3ede99217b33cc4869e0ec2f9"></a>MODE_JOINT_TORQUE&#160;</td><td class="fielddoc"><p>Real-time joint torque control. </p>
+<dl class="section note"><dt>Note</dt><dd>Receive and execute user commands at 1kHz </dd></dl>
 </td></tr>
-<tr><td class="fieldname"><a id="a0938f2444c0fa9050f9eb0008bd1a3e4a90cd6cd3ede99217b33cc4869e0ec2f9"></a>MODE_JOINT_TORQUE&#160;</td><td class="fielddoc"><p>Joint torque control. </p>
-<dl class="section note"><dt>Note</dt><dd>Real-time control mode running at 1kHz </dd></dl>
+<tr><td class="fieldname"><a id="a0938f2444c0fa9050f9eb0008bd1a3e4a75879fbbe308f1a49690128bd8d253cd"></a>MODE_JOINT_POSITION&#160;</td><td class="fielddoc"><p>Real-time joint position control. </p>
+<dl class="section note"><dt>Note</dt><dd>Receive and execute user commands at 1kHz </dd></dl>
+</td></tr>
+<tr><td class="fieldname"><a id="a0938f2444c0fa9050f9eb0008bd1a3e4a390f59cbaf64cb9d8a17c3ce3560e9fe"></a>MODE_JOINT_POSITION_NRT&#160;</td><td class="fielddoc"><p>Non-real-time joint position control. </p>
+<dl class="section note"><dt>Note</dt><dd>Receive and execute user commands at &lt; 1kHz </dd></dl>
 </td></tr>
 <tr><td class="fieldname"><a id="a0938f2444c0fa9050f9eb0008bd1a3e4ad55007e241808eee66359cfde88ba1d3"></a>MODE_PLAN_EXECUTION&#160;</td><td class="fielddoc"><p>Execute the plan specified by user. </p>
-<dl class="section note"><dt>Note</dt><dd>Non-realtime control mode. The user selects a plan and executes it. Upon completion, the user can send another plan </dd></dl>
+<dl class="section note"><dt>Note</dt><dd>Non-real-time control mode. The user selects a plan and executes it. Upon completion, the user can send another plan </dd></dl>
 </td></tr>
 <tr><td class="fieldname"><a id="a0938f2444c0fa9050f9eb0008bd1a3e4a69424d24cc7afed19bc29f5a024b16fa"></a>MODE_PRIMITIVE_EXECUTION&#160;</td><td class="fielddoc"><p>Execute the primitive specified by user. </p>
-<dl class="section note"><dt>Note</dt><dd>Non-realtime control mode. The user sends a primitive command with the name and the associated parameters and executes it. Upon completion, the user can send another primitive command </dd></dl>
+<dl class="section note"><dt>Note</dt><dd>Non-real-time control mode. The user sends a primitive command with the name and the associated parameters and executes it. Upon completion, the user can send another primitive command </dd></dl>
 </td></tr>
-<tr><td class="fieldname"><a id="a0938f2444c0fa9050f9eb0008bd1a3e4a3a5245a2f5eda3a9378ad2e08b9125f6"></a>MODE_CARTESIAN_IMPEDANCE&#160;</td><td class="fielddoc"><p>Cartesian impedance control. </p>
-<dl class="section note"><dt>Note</dt><dd>Real-time control mode running at 1kHz </dd></dl>
+<tr><td class="fieldname"><a id="a0938f2444c0fa9050f9eb0008bd1a3e4a3a5245a2f5eda3a9378ad2e08b9125f6"></a>MODE_CARTESIAN_IMPEDANCE&#160;</td><td class="fielddoc"><p>Real-time Cartesian impedance control. </p>
+<dl class="section note"><dt>Note</dt><dd>Receive and execute user commands at 1kHz </dd></dl>
+</td></tr>
+<tr><td class="fieldname"><a id="a0938f2444c0fa9050f9eb0008bd1a3e4acf7e9d29f926352837a487afb170249d"></a>MODE_CARTESIAN_IMPEDANCE_NRT&#160;</td><td class="fielddoc"><p>Non-realtime Cartesian impedance control. </p>
+<dl class="section note"><dt>Note</dt><dd>Receive and execute user commands at &lt; 1kHz </dd></dl>
 </td></tr>
 </table>
 

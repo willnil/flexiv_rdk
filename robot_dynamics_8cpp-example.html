@@ -30,7 +30,7 @@
   <td id="projectlogo"><img alt="Logo" src="flexiv_logo.png"/></td>
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">RDK
-   &#160;<span id="projectnumber">0.3.1</span>
+   &#160;<span id="projectnumber">0.4.0</span>
    </div>
    <div id="projectbrief">C++ APIs</div>
   </td>
@@ -75,7 +75,7 @@ $(function() {
 <div class="title">robot_dynamics.cpp</div>  </div>
 </div><!--header-->
 <div class="contents">
-<p>Demonstrate how to use RDK's built-in dynamics engine using APIs in <a class="el" href="classflexiv_1_1_model.html" title="Integrated dynamics engine with robot model and dynamics.">flexiv::Model</a>. </p><dl class="section copyright"><dt>Copyright</dt><dd>(C) 2016-2021 Flexiv Ltd. All Rights Reserved. </dd></dl>
+<p>Demonstrate how to use RDK's built-in dynamics engine using APIs in <a class="el" href="classflexiv_1_1_model.html" title="Integrated dynamics engine with robot model and dynamics.">flexiv::Model</a>. </p><dl class="section copyright"><dt>Copyright</dt><dd>Copyright (C) 2016-2021 Flexiv Ltd. All Rights Reserved. </dd></dl>
 <dl class="section author"><dt>Author</dt><dd>Flexiv</dd></dl>
 <div class="fragment"><div class="line"> </div>
 <div class="line"><span class="preprocessor">#include &lt;<a class="code" href="_robot_8hpp.html">Robot.hpp</a>&gt;</span></div>
@@ -90,47 +90,42 @@ $(function() {
 <div class="line"> </div>
 <div class="line"><span class="keyword">namespace </span>{</div>
 <div class="line"> </div>
-<div class="line"><span class="comment">// loop counter</span></div>
 <div class="line"><span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> g_loopCounter = 0;</div>
 <div class="line"> </div>
-<div class="line"><span class="comment">// timer to measure scheduler performance</span></div>
 <div class="line">std::chrono::high_resolution_clock::time_point g_tic, g_toc;</div>
 <div class="line"> </div>
-<div class="line"><span class="comment">// data to be printed in low-priority thread</span></div>
 <div class="line"><span class="keyword">struct </span>PrintData</div>
 <div class="line">{</div>
 <div class="line">    int64_t loopTime;</div>
 <div class="line">    Eigen::VectorXd gravity;</div>
 <div class="line">} g_printData;</div>
 <div class="line"> </div>
-<div class="line"><span class="comment">// mutex on data to be printed in low-priority thread</span></div>
 <div class="line">std::mutex g_printDataMutex;</div>
 <div class="line"> </div>
 <div class="line">}</div>
 <div class="line"> </div>
-<div class="line"><span class="comment">// user-defined high-priority realtime periodic task, running at 1kHz</span></div>
 <div class="line"><span class="keywordtype">void</span> highPriorityPeriodicTask(std::shared_ptr&lt;flexiv::RobotStates&gt; robotStates,</div>
 <div class="line">    std::shared_ptr&lt;flexiv::Robot&gt; robot, std::shared_ptr&lt;flexiv::Model&gt; model)</div>
 <div class="line">{</div>
-<div class="line">    <span class="comment">// mark timer start point</span></div>
+<div class="line">    <span class="comment">// Mark timer start point</span></div>
 <div class="line">    g_tic = std::chrono::high_resolution_clock::now();</div>
 <div class="line"> </div>
-<div class="line">    <span class="comment">// get new robot states</span></div>
+<div class="line">    <span class="comment">// Get new robot states</span></div>
 <div class="line">    robot-&gt;getRobotStates(robotStates.get());</div>
 <div class="line"> </div>
-<div class="line">    <span class="comment">// update robot model in dynamics engine</span></div>
+<div class="line">    <span class="comment">// Update robot model in dynamics engine</span></div>
 <div class="line">    model-&gt;updateModel(robotStates-&gt;m_q, robotStates-&gt;m_dtheta);</div>
 <div class="line"> </div>
-<div class="line">    <span class="comment">// get and print gravity vector</span></div>
+<div class="line">    <span class="comment">// Get and print gravity vector</span></div>
 <div class="line">    <span class="keyword">auto</span> gravity = model-&gt;getGravityForce();</div>
 <div class="line"> </div>
-<div class="line">    <span class="comment">// mark timer end point and get loop time</span></div>
+<div class="line">    <span class="comment">// Mark timer end point and get loop time</span></div>
 <div class="line">    g_toc = std::chrono::high_resolution_clock::now();</div>
 <div class="line">    <span class="keyword">auto</span> loopTime</div>
 <div class="line">        = std::chrono::duration_cast&lt;std::chrono::microseconds&gt;(g_toc - g_tic)</div>
 <div class="line">              .count();</div>
 <div class="line"> </div>
-<div class="line">    <span class="comment">// save to global struct for printing in another thread</span></div>
+<div class="line">    <span class="comment">// Save to global struct for printing in another thread</span></div>
 <div class="line">    {</div>
 <div class="line">        std::lock_guard&lt;std::mutex&gt; lock(g_printDataMutex);</div>
 <div class="line">        g_printData.loopTime = loopTime;</div>
@@ -138,19 +133,17 @@ $(function() {
 <div class="line">    }</div>
 <div class="line">}</div>
 <div class="line"> </div>
-<div class="line"><span class="comment">// user-defined low-priority non-realtime task</span></div>
-<div class="line"><span class="comment">// NOT strictly scheduled at a fixed rate</span></div>
 <div class="line"><span class="keywordtype">void</span> lowPriorityTask()</div>
 <div class="line">{</div>
-<div class="line">    <span class="comment">// wait for a while for the time interval data to be available</span></div>
+<div class="line">    <span class="comment">// Wait for a while for the time interval data to be available</span></div>
 <div class="line">    std::this_thread::sleep_for(std::chrono::seconds(2));</div>
 <div class="line"> </div>
-<div class="line">    <span class="comment">// use while loop to prevent this thread from return</span></div>
+<div class="line">    <span class="comment">// Use while loop to prevent this thread from return</span></div>
 <div class="line">    <span class="keywordflow">while</span> (<span class="keyword">true</span>) {</div>
-<div class="line">        <span class="comment">// wake up every second to do something</span></div>
+<div class="line">        <span class="comment">// Wake up every second to do something</span></div>
 <div class="line">        std::this_thread::sleep_for(std::chrono::seconds(1));</div>
 <div class="line"> </div>
-<div class="line">        <span class="comment">// safely read the global variable</span></div>
+<div class="line">        <span class="comment">// Safely read the global variable</span></div>
 <div class="line">        <span class="keywordtype">int</span> loopTime;</div>
 <div class="line">        Eigen::VectorXd gravity;</div>
 <div class="line">        {</div>
@@ -159,10 +152,10 @@ $(function() {
 <div class="line">            gravity = g_printData.gravity;</div>
 <div class="line">        }</div>
 <div class="line"> </div>
-<div class="line">        <span class="comment">// print time interval of high-priority periodic task</span></div>
+<div class="line">        <span class="comment">// Print time interval of high-priority periodic task</span></div>
 <div class="line">        std::cout &lt;&lt; <span class="stringliteral">&quot;Loop time = &quot;</span> &lt;&lt; loopTime &lt;&lt; <span class="stringliteral">&quot; us  ||  &quot;</span>;</div>
 <div class="line"> </div>
-<div class="line">        <span class="comment">// print gravity</span></div>
+<div class="line">        <span class="comment">// Print gravity</span></div>
 <div class="line">        std::cout &lt;&lt; std::fixed &lt;&lt; std::setprecision(5)</div>
 <div class="line">                  &lt;&lt; <span class="stringliteral">&quot;Gravity = &quot;</span> &lt;&lt; gravity.transpose() &lt;&lt; std::endl;</div>
 <div class="line">    }</div>
@@ -170,12 +163,12 @@ $(function() {
 <div class="line"> </div>
 <div class="line"><span class="keywordtype">int</span> main(<span class="keywordtype">int</span> argc, <span class="keywordtype">char</span>* argv[])</div>
 <div class="line">{</div>
-<div class="line">    <span class="comment">// log object for printing message with timestamp and coloring</span></div>
+<div class="line">    <span class="comment">// Log object for printing message with timestamp and coloring</span></div>
 <div class="line">    <a name="_a0"></a><a class="code" href="classflexiv_1_1_log.html">flexiv::Log</a> log;</div>
 <div class="line"> </div>
 <div class="line">    <span class="comment">// Parse Parameters</span></div>
 <div class="line">    <span class="comment">//=============================================================================</span></div>
-<div class="line">    <span class="comment">// check if program has 3 arguments</span></div>
+<div class="line">    <span class="comment">// Check if program has 3 arguments</span></div>
 <div class="line">    <span class="keywordflow">if</span> (argc != 3) {</div>
 <div class="line">        log.<a name="a1"></a><a class="code" href="classflexiv_1_1_log.html#ac2e9a784da1b98c85ba1d5f29f0bb2c4">error</a>(<span class="stringliteral">&quot;Invalid program arguments. Usage: &lt;robot_ip&gt; &lt;local_ip&gt;&quot;</span>);</div>
 <div class="line">        <span class="keywordflow">return</span> 0;</div>
@@ -188,35 +181,35 @@ $(function() {
 <div class="line"> </div>
 <div class="line">    <span class="comment">// RDK Initialization</span></div>
 <div class="line">    <span class="comment">//=============================================================================</span></div>
-<div class="line">    <span class="comment">// instantiate robot interface</span></div>
+<div class="line">    <span class="comment">// Instantiate robot interface</span></div>
 <div class="line">    <span class="keyword">auto</span> robot = std::make_shared&lt;flexiv::Robot&gt;();</div>
 <div class="line"> </div>
-<div class="line">    <span class="comment">// create data struct for storing robot states</span></div>
+<div class="line">    <span class="comment">// Create data struct for storing robot states</span></div>
 <div class="line">    <span class="keyword">auto</span> robotStates = std::make_shared&lt;flexiv::RobotStates&gt;();</div>
 <div class="line"> </div>
-<div class="line">    <span class="comment">// initialize robot interface and connect to the robot server</span></div>
+<div class="line">    <span class="comment">// Initialize robot interface and connect to the robot server</span></div>
 <div class="line">    robot-&gt;init(robotIP, localIP);</div>
 <div class="line"> </div>
-<div class="line">    <span class="comment">// wait for the connection to be established</span></div>
+<div class="line">    <span class="comment">// Wait for the connection to be established</span></div>
 <div class="line">    <span class="keywordflow">do</span> {</div>
 <div class="line">        std::this_thread::sleep_for(std::chrono::milliseconds(1));</div>
 <div class="line">    } <span class="keywordflow">while</span> (!robot-&gt;isConnected());</div>
 <div class="line"> </div>
-<div class="line">    <span class="comment">// enable the robot, make sure the E-stop is released before enabling</span></div>
+<div class="line">    <span class="comment">// Enable the robot, make sure the E-stop is released before enabling</span></div>
 <div class="line">    <span class="keywordflow">if</span> (robot-&gt;enable()) {</div>
 <div class="line">        log.<a name="a2"></a><a class="code" href="classflexiv_1_1_log.html#aa49e1b267d12e57ac625105aa8be7ecb">info</a>(<span class="stringliteral">&quot;Enabling robot ...&quot;</span>);</div>
 <div class="line">    }</div>
 <div class="line"> </div>
-<div class="line">    <span class="comment">// wait for the robot to become operational</span></div>
+<div class="line">    <span class="comment">// Wait for the robot to become operational</span></div>
 <div class="line">    <span class="keywordflow">do</span> {</div>
 <div class="line">        std::this_thread::sleep_for(std::chrono::milliseconds(1));</div>
 <div class="line">    } <span class="keywordflow">while</span> (!robot-&gt;isOperational());</div>
 <div class="line">    log.<a class="code" href="classflexiv_1_1_log.html#aa49e1b267d12e57ac625105aa8be7ecb">info</a>(<span class="stringliteral">&quot;Robot is now operational&quot;</span>);</div>
 <div class="line"> </div>
-<div class="line">    <span class="comment">// set mode after robot is operational</span></div>
+<div class="line">    <span class="comment">// Set mode after robot is operational</span></div>
 <div class="line">    robot-&gt;setMode(<a name="a3"></a>flexiv::MODE_PLAN_EXECUTION);</div>
 <div class="line"> </div>
-<div class="line">    <span class="comment">// wait for mode to be switched</span></div>
+<div class="line">    <span class="comment">// Wait for mode to be switched</span></div>
 <div class="line">    <span class="keywordflow">do</span> {</div>
 <div class="line">        std::this_thread::sleep_for(std::chrono::milliseconds(1));</div>
 <div class="line">    } <span class="keywordflow">while</span> (robot-&gt;getMode() != flexiv::MODE_PLAN_EXECUTION);</div>
@@ -226,22 +219,19 @@ $(function() {
 <div class="line">    robot-&gt;executePlanByName(<span class="stringliteral">&quot;PLAN-Home&quot;</span>);</div>
 <div class="line"> </div>
 <div class="line">    <a name="_a4"></a><a class="code" href="structflexiv_1_1_system_status.html">flexiv::SystemStatus</a> systemStatus;</div>
-<div class="line">    <span class="comment">// wait until execution begin</span></div>
+<div class="line">    <span class="comment">// Wait for the plan to start</span></div>
+<div class="line">    std::this_thread::sleep_for(std::chrono::seconds(1));</div>
+<div class="line"> </div>
+<div class="line">    <span class="comment">// Wait for the execution to finish</span></div>
 <div class="line">    <span class="keywordflow">do</span> {</div>
 <div class="line">        robot-&gt;getSystemStatus(&amp;systemStatus);</div>
 <div class="line">        std::this_thread::sleep_for(std::chrono::milliseconds(1));</div>
-<div class="line">    } <span class="keywordflow">while</span> (systemStatus.<a name="a5"></a><a class="code" href="structflexiv_1_1_system_status.html#a05ae5341d67d7f3e51fe9bf498713fcd">m_programRunning</a> == <span class="keyword">false</span>);</div>
+<div class="line">    } <span class="keywordflow">while</span> (systemStatus.<a name="a5"></a><a class="code" href="structflexiv_1_1_system_status.html#a05ae5341d67d7f3e51fe9bf498713fcd">m_programRunning</a> == <span class="keyword">true</span>);</div>
 <div class="line"> </div>
-<div class="line">    <span class="comment">// wait until execution finished</span></div>
-<div class="line">    <span class="keywordflow">do</span> {</div>
-<div class="line">        robot-&gt;getSystemStatus(&amp;systemStatus);</div>
-<div class="line">        std::this_thread::sleep_for(std::chrono::milliseconds(1));</div>
-<div class="line">    } <span class="keywordflow">while</span> (systemStatus.<a class="code" href="structflexiv_1_1_system_status.html#a05ae5341d67d7f3e51fe9bf498713fcd">m_programRunning</a> == <span class="keyword">true</span>);</div>
-<div class="line"> </div>
-<div class="line">    <span class="comment">// put mode back to IDLE</span></div>
+<div class="line">    <span class="comment">// Put mode back to IDLE</span></div>
 <div class="line">    robot-&gt;setMode(<a name="a6"></a>flexiv::MODE_IDLE);</div>
 <div class="line"> </div>
-<div class="line">    <span class="comment">// wait for the mode to be switched</span></div>
+<div class="line">    <span class="comment">// Wait for the mode to be switched</span></div>
 <div class="line">    <span class="keywordflow">do</span> {</div>
 <div class="line">        std::this_thread::sleep_for(std::chrono::milliseconds(1));</div>
 <div class="line">    } <span class="keywordflow">while</span> (robot-&gt;getMode() != flexiv::MODE_IDLE);</div>
@@ -249,17 +239,17 @@ $(function() {
 <div class="line">    <span class="comment">// Robot Model (Dynamics Engine) Initialization</span></div>
 <div class="line">    <span class="comment">//=============================================================================</span></div>
 <div class="line">    <span class="keyword">auto</span> model = std::make_shared&lt;flexiv::Model&gt;();</div>
-<div class="line">    <span class="comment">// load model from robot client</span></div>
+<div class="line">    <span class="comment">// Load model from robot client</span></div>
 <div class="line">    robot-&gt;loadModel(model.get());</div>
 <div class="line"> </div>
 <div class="line">    <span class="comment">// Low-priority Background Tasks</span></div>
 <div class="line">    <span class="comment">//=============================================================================</span></div>
-<div class="line">    <span class="comment">// use std::thread for some non-realtime tasks, not joining (non-blocking)</span></div>
+<div class="line">    <span class="comment">// Use std::thread for some non-realtime tasks, not joining (non-blocking)</span></div>
 <div class="line">    std::thread lowPriorityThread(lowPriorityTask);</div>
 <div class="line"> </div>
 <div class="line">    <span class="comment">// High-priority Realtime Periodic Task @ 1kHz</span></div>
 <div class="line">    <span class="comment">//=============================================================================</span></div>
-<div class="line">    <span class="comment">// this is a blocking method, so all other user-defined background threads</span></div>
+<div class="line">    <span class="comment">// This is a blocking method, so all other user-defined background threads</span></div>
 <div class="line">    <span class="comment">// should be spawned before this</span></div>
 <div class="line">    robot-&gt;start(</div>
 <div class="line">        std::bind(highPriorityPeriodicTask, robotStates, robot, model));</div>

@@ -30,7 +30,7 @@
   <td id="projectlogo"><img alt="Logo" src="flexiv_logo.png"/></td>
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">RDK
-   &#160;<span id="projectnumber">0.3.1</span>
+   &#160;<span id="projectnumber">0.4.0</span>
    </div>
    <div id="projectbrief">C++ APIs</div>
   </td>
@@ -75,7 +75,7 @@ $(function() {
 <div class="title">display_robot_states.cpp</div>  </div>
 </div><!--header-->
 <div class="contents">
-<p>Print received robot states. </p><dl class="section copyright"><dt>Copyright</dt><dd>(C) 2016-2021 Flexiv Ltd. All Rights Reserved. </dd></dl>
+<p>Print received robot states. </p><dl class="section copyright"><dt>Copyright</dt><dd>Copyright (C) 2016-2021 Flexiv Ltd. All Rights Reserved. </dd></dl>
 <dl class="section author"><dt>Author</dt><dd>Flexiv</dd></dl>
 <div class="fragment"><div class="line"> </div>
 <div class="line"><span class="preprocessor">#include &lt;<a class="code" href="_robot_8hpp.html">Robot.hpp</a>&gt;</span></div>
@@ -87,45 +87,39 @@ $(function() {
 <div class="line"><span class="preprocessor">#include &lt;mutex&gt;</span></div>
 <div class="line"> </div>
 <div class="line"><span class="keyword">namespace </span>{</div>
-<div class="line"> </div>
-<div class="line"><span class="comment">// print counter</span></div>
 <div class="line"><span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> g_printCounter = 0;</div>
 <div class="line"> </div>
-<div class="line"><span class="comment">// robot states to be printed in another low-priority thread</span></div>
 <div class="line"><a name="_a0"></a><a class="code" href="structflexiv_1_1_robot_states.html">flexiv::RobotStates</a> g_robotStatesPrintBuffer;</div>
 <div class="line"> </div>
-<div class="line"><span class="comment">// mutex on robot states print buffer</span></div>
 <div class="line">std::mutex g_printBufferMutex;</div>
-<div class="line"> </div>
 <div class="line">}</div>
 <div class="line"> </div>
-<div class="line"><span class="comment">// user-defined high-priority realtime periodic task, running at 1kHz</span></div>
 <div class="line"><span class="keywordtype">void</span> highPriorityPeriodicTask(std::shared_ptr&lt;flexiv::RobotStates&gt; robotStates,</div>
 <div class="line">    std::shared_ptr&lt;flexiv::Robot&gt; robot)</div>
 <div class="line">{</div>
-<div class="line">    <span class="comment">// get robot states</span></div>
+<div class="line">    <span class="comment">// Get robot states</span></div>
 <div class="line">    robot-&gt;getRobotStates(robotStates.get());</div>
 <div class="line"> </div>
-<div class="line">    <span class="comment">// save data to buffer for printing in another thread</span></div>
+<div class="line">    <span class="comment">// Save data to buffer for printing in another thread</span></div>
 <div class="line">    {</div>
 <div class="line">        std::lock_guard&lt;std::mutex&gt; lock(g_printBufferMutex);</div>
 <div class="line">        g_robotStatesPrintBuffer = *(robotStates.get());</div>
 <div class="line">    }</div>
 <div class="line">}</div>
 <div class="line"> </div>
-<div class="line"><span class="comment">// user-defined low-priority non-realtime task</span></div>
+<div class="line"><span class="comment">// User-defined low-priority non-realtime task</span></div>
 <div class="line"><span class="comment">// NOT strictly scheduled at a fixed rate</span></div>
 <div class="line"><span class="keywordtype">void</span> lowPriorityTask()</div>
 <div class="line">{</div>
-<div class="line">    <span class="comment">// wait a while for the data to start streaming</span></div>
+<div class="line">    <span class="comment">// Wait a while for the data to start streaming</span></div>
 <div class="line">    std::this_thread::sleep_for(std::chrono::seconds(2));</div>
 <div class="line"> </div>
-<div class="line">    <span class="comment">// use while loop to prevent this thread from return</span></div>
+<div class="line">    <span class="comment">// Use while loop to prevent this thread from return</span></div>
 <div class="line">    <span class="keywordflow">while</span> (<span class="keyword">true</span>) {</div>
-<div class="line">        <span class="comment">// wake up every second to do something</span></div>
+<div class="line">        <span class="comment">// Wake up every second to do something</span></div>
 <div class="line">        std::this_thread::sleep_for(std::chrono::seconds(1));</div>
 <div class="line"> </div>
-<div class="line">        <span class="comment">// safely save data in print buffer to local first to avoid prolonged</span></div>
+<div class="line">        <span class="comment">// Safely save data in print buffer to local first to avoid prolonged</span></div>
 <div class="line">        <span class="comment">// mutex lock</span></div>
 <div class="line">        <a class="code" href="structflexiv_1_1_robot_states.html">flexiv::RobotStates</a> robotStates;</div>
 <div class="line">        {</div>
@@ -133,12 +127,12 @@ $(function() {
 <div class="line">            robotStates = g_robotStatesPrintBuffer;</div>
 <div class="line">        }</div>
 <div class="line"> </div>
-<div class="line">        <span class="comment">// divider</span></div>
+<div class="line">        <span class="comment">// Print divider</span></div>
 <div class="line">        std::cout &lt;&lt; <span class="stringliteral">&quot;\n\n[&quot;</span> &lt;&lt; ++g_printCounter &lt;&lt; <span class="stringliteral">&quot;]&quot;</span>;</div>
 <div class="line">        std::cout &lt;&lt; <span class="stringliteral">&quot;=========================================================&quot;</span></div>
 <div class="line">                  &lt;&lt; std::endl;</div>
 <div class="line"> </div>
-<div class="line">        <span class="comment">// print all robot states in JSON format using the built-in ostream</span></div>
+<div class="line">        <span class="comment">// Print all robot states in JSON format using the built-in ostream</span></div>
 <div class="line">        <span class="comment">// operator overloading</span></div>
 <div class="line">        std::cout &lt;&lt; robotStates &lt;&lt; std::endl;</div>
 <div class="line">    }</div>
@@ -146,12 +140,12 @@ $(function() {
 <div class="line"> </div>
 <div class="line"><span class="keywordtype">int</span> main(<span class="keywordtype">int</span> argc, <span class="keywordtype">char</span>* argv[])</div>
 <div class="line">{</div>
-<div class="line">    <span class="comment">// log object for printing message with timestamp and coloring</span></div>
+<div class="line">    <span class="comment">// Log object for printing message with timestamp and coloring</span></div>
 <div class="line">    <a name="_a1"></a><a class="code" href="classflexiv_1_1_log.html">flexiv::Log</a> log;</div>
 <div class="line"> </div>
 <div class="line">    <span class="comment">// Parse Parameters</span></div>
 <div class="line">    <span class="comment">//=============================================================================</span></div>
-<div class="line">    <span class="comment">// check if program has 3 arguments</span></div>
+<div class="line">    <span class="comment">// Check if program has 3 arguments</span></div>
 <div class="line">    <span class="keywordflow">if</span> (argc != 3) {</div>
 <div class="line">        log.<a name="a2"></a><a class="code" href="classflexiv_1_1_log.html#ac2e9a784da1b98c85ba1d5f29f0bb2c4">error</a>(<span class="stringliteral">&quot;Invalid program arguments. Usage: &lt;robot_ip&gt; &lt;local_ip&gt;&quot;</span>);</div>
 <div class="line">        <span class="keywordflow">return</span> 0;</div>
@@ -164,42 +158,42 @@ $(function() {
 <div class="line"> </div>
 <div class="line">    <span class="comment">// RDK Initialization</span></div>
 <div class="line">    <span class="comment">//=============================================================================</span></div>
-<div class="line">    <span class="comment">// instantiate robot interface</span></div>
+<div class="line">    <span class="comment">// Instantiate robot interface</span></div>
 <div class="line">    <span class="keyword">auto</span> robot = std::make_shared&lt;flexiv::Robot&gt;();</div>
 <div class="line"> </div>
-<div class="line">    <span class="comment">// create data struct for storing robot states</span></div>
+<div class="line">    <span class="comment">// Create data struct for storing robot states</span></div>
 <div class="line">    <span class="keyword">auto</span> robotStates = std::make_shared&lt;flexiv::RobotStates&gt;();</div>
 <div class="line"> </div>
-<div class="line">    <span class="comment">// initialize robot interface and connect to the robot server</span></div>
+<div class="line">    <span class="comment">// Initialize robot interface and connect to the robot server</span></div>
 <div class="line">    robot-&gt;init(robotIP, localIP);</div>
 <div class="line"> </div>
-<div class="line">    <span class="comment">// wait for the connection to be established</span></div>
+<div class="line">    <span class="comment">// Wait for the connection to be established</span></div>
 <div class="line">    <span class="keywordflow">do</span> {</div>
 <div class="line">        std::this_thread::sleep_for(std::chrono::milliseconds(1));</div>
 <div class="line">    } <span class="keywordflow">while</span> (!robot-&gt;isConnected());</div>
 <div class="line"> </div>
-<div class="line">    <span class="comment">// enable the robot, make sure the E-stop is released before enabling</span></div>
+<div class="line">    <span class="comment">// Enable the robot, make sure the E-stop is released before enabling</span></div>
 <div class="line">    <span class="keywordflow">if</span> (robot-&gt;enable()) {</div>
 <div class="line">        log.<a name="a3"></a><a class="code" href="classflexiv_1_1_log.html#aa49e1b267d12e57ac625105aa8be7ecb">info</a>(<span class="stringliteral">&quot;Enabling robot ...&quot;</span>);</div>
 <div class="line">    }</div>
 <div class="line"> </div>
-<div class="line">    <span class="comment">// wait for the robot to become operational</span></div>
+<div class="line">    <span class="comment">// Wait for the robot to become operational</span></div>
 <div class="line">    <span class="keywordflow">do</span> {</div>
 <div class="line">        std::this_thread::sleep_for(std::chrono::milliseconds(1));</div>
 <div class="line">    } <span class="keywordflow">while</span> (!robot-&gt;isOperational());</div>
 <div class="line">    log.<a class="code" href="classflexiv_1_1_log.html#aa49e1b267d12e57ac625105aa8be7ecb">info</a>(<span class="stringliteral">&quot;Robot is now operational&quot;</span>);</div>
 <div class="line"> </div>
-<div class="line">    <span class="comment">// set mode after robot is operational</span></div>
+<div class="line">    <span class="comment">// Set mode after robot is operational</span></div>
 <div class="line">    robot-&gt;setMode(<a name="a4"></a>flexiv::MODE_IDLE);</div>
 <div class="line"> </div>
 <div class="line">    <span class="comment">// Low-priority Background Tasks</span></div>
 <div class="line">    <span class="comment">//=============================================================================</span></div>
-<div class="line">    <span class="comment">// use std::thread for some non-realtime tasks, not joining (non-blocking)</span></div>
+<div class="line">    <span class="comment">// Use std::thread for some non-realtime tasks, not joining (non-blocking)</span></div>
 <div class="line">    std::thread lowPriorityThread(lowPriorityTask);</div>
 <div class="line"> </div>
 <div class="line">    <span class="comment">// High-priority Realtime Periodic Task @ 1kHz</span></div>
 <div class="line">    <span class="comment">//=============================================================================</span></div>
-<div class="line">    <span class="comment">// this is a blocking method, so all other user-defined background threads</span></div>
+<div class="line">    <span class="comment">// This is a blocking method, so all other user-defined background threads</span></div>
 <div class="line">    <span class="comment">// should be spawned before this</span></div>
 <div class="line">    robot-&gt;start(std::bind(highPriorityPeriodicTask, robotStates, robot));</div>
 <div class="line"> </div>

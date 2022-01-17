@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['visualization_92',['Visualization',['../classflexiv_1_1_visualization.html',1,'flexiv']]],
-  ['visualization_2ehpp_93',['Visualization.hpp',['../_visualization_8hpp.html',1,'']]]
+  ['warn_98',['warn',['../classflexiv_1_1_log.html#a4074ec4125c96c32cac33a4e0aed28cc',1,'flexiv::Log']]],
+  ['writedigitaloutput_99',['writeDigitalOutput',['../classflexiv_1_1_robot.html#aabcf52cc45717498f7729553442d81be',1,'flexiv::Robot']]]
 ];

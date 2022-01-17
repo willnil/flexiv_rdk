@@ -30,7 +30,7 @@
   <td id="projectlogo"><img alt="Logo" src="flexiv_logo.png"/></td>
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">RDK
-   &#160;<span id="projectnumber">0.3.1</span>
+   &#160;<span id="projectnumber">0.4.0</span>
    </div>
    <div id="projectbrief">C++ APIs</div>
   </td>
@@ -75,7 +75,7 @@ $(function() {
 <div class="title">primitive_execution.cpp</div>  </div>
 </div><!--header-->
 <div class="contents">
-<p>Execute various primitives using RDK's primitive execution API. </p><dl class="section copyright"><dt>Copyright</dt><dd>(C) 2016-2021 Flexiv Ltd. All Rights Reserved. </dd></dl>
+<p>Execute various primitives using RDK's primitive execution API. </p><dl class="section copyright"><dt>Copyright</dt><dd>Copyright (C) 2016-2021 Flexiv Ltd. All Rights Reserved. </dd></dl>
 <dl class="section author"><dt>Author</dt><dd>Flexiv</dd></dl>
 <div class="fragment"><div class="line"> </div>
 <div class="line"><span class="preprocessor">#include &lt;<a class="code" href="_robot_8hpp.html">Robot.hpp</a>&gt;</span></div>
@@ -93,38 +93,37 @@ $(function() {
 <div class="line"><span class="keyword">const</span> <span class="keywordtype">bool</span> k_printPtStates = <span class="keyword">false</span>;</div>
 <div class="line">}</div>
 <div class="line"> </div>
-<div class="line"><span class="comment">// callback function for user-defined primitive state machine</span></div>
 <div class="line"><span class="keywordtype">void</span> primitiveStateMachine(std::shared_ptr&lt;flexiv::Robot&gt; robot)</div>
 <div class="line">{</div>
-<div class="line">    <span class="comment">// log object for printing message with timestamp and coloring</span></div>
+<div class="line">    <span class="comment">// Log object for printing message with timestamp and coloring</span></div>
 <div class="line">    <a name="_a0"></a><a class="code" href="classflexiv_1_1_log.html">flexiv::Log</a> log;</div>
 <div class="line"> </div>
-<div class="line">    <span class="comment">// data struct for system status</span></div>
+<div class="line">    <span class="comment">// Data struct for system status</span></div>
 <div class="line">    <a name="_a1"></a><a class="code" href="structflexiv_1_1_system_status.html">flexiv::SystemStatus</a> systemStatus;</div>
 <div class="line"> </div>
-<div class="line">    <span class="comment">// if transitting to the next primitive</span></div>
+<div class="line">    <span class="comment">// If transitting to the next primitive</span></div>
 <div class="line">    <span class="keywordtype">bool</span> transitPrimitive = <span class="keyword">false</span>;</div>
 <div class="line"> </div>
-<div class="line">    <span class="comment">// index for iterating through various primitives</span></div>
+<div class="line">    <span class="comment">// Index for iterating through various primitives</span></div>
 <div class="line">    <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> ptIndex = 1;</div>
 <div class="line"> </div>
-<div class="line">    <span class="comment">// start any primitive once to pass the first transition condition check</span></div>
+<div class="line">    <span class="comment">// Start any primitive once to pass the first transition condition check</span></div>
 <div class="line">    robot-&gt;executePrimitive(<span class="stringliteral">&quot;Home()&quot;</span>);</div>
 <div class="line"> </div>
-<div class="line">    <span class="comment">// use while loop to prevent this thread from return</span></div>
+<div class="line">    <span class="comment">// Use while loop to prevent this thread from return</span></div>
 <div class="line">    <span class="keywordflow">while</span> (<span class="keyword">true</span>) {</div>
-<div class="line">        <span class="comment">// run periodic tasks at 10Hz in this thread</span></div>
+<div class="line">        <span class="comment">// Run user periodic tasks at 10Hz in this thread</span></div>
 <div class="line">        std::this_thread::sleep_for(std::chrono::milliseconds(100));</div>
 <div class="line"> </div>
-<div class="line">        <span class="comment">// reset transition flag before checking for transition conditions</span></div>
+<div class="line">        <span class="comment">// Reset transition flag before checking for transition conditions</span></div>
 <div class="line">        transitPrimitive = <span class="keyword">false</span>;</div>
 <div class="line"> </div>
-<div class="line">        <span class="comment">// get system status</span></div>
+<div class="line">        <span class="comment">// Get system status</span></div>
 <div class="line">        robot-&gt;getSystemStatus(&amp;systemStatus);</div>
 <div class="line"> </div>
-<div class="line">        <span class="comment">// check for transition conditions</span></div>
+<div class="line">        <span class="comment">// Check for transition conditions</span></div>
 <div class="line">        <span class="keywordflow">for</span> (<span class="keyword">const</span> <span class="keyword">auto</span>&amp; state : systemStatus.<a name="a2"></a><a class="code" href="structflexiv_1_1_system_status.html#a592cd9b2ba4cdfbbc36208373cc360e8">m_ptStates</a>) {</div>
-<div class="line">            <span class="comment">// parse key information from the string list for transition</span></div>
+<div class="line">            <span class="comment">// Parse key information from the string list for transition</span></div>
 <div class="line">            <span class="comment">// control</span></div>
 <div class="line">            std::stringstream ss(state);</div>
 <div class="line">            std::string buffer;</div>
@@ -133,86 +132,76 @@ $(function() {
 <div class="line">                parsedState.push_back(buffer);</div>
 <div class="line">            }</div>
 <div class="line"> </div>
-<div class="line">            <span class="comment">// transition condition: &quot;reachedTarget = 1&quot;</span></div>
+<div class="line">            <span class="comment">// Transition condition: &quot;reachedTarget = 1&quot;</span></div>
 <div class="line">            <span class="keywordflow">if</span> (parsedState.front() == <span class="stringliteral">&quot;reachedTarget&quot;</span>) {</div>
-<div class="line">                <span class="comment">// save the corresponding value, it should be at the end</span></div>
+<div class="line">                <span class="comment">// Save the corresponding value, it should be at the end</span></div>
 <div class="line">                <span class="keywordflow">if</span> (std::stoi(parsedState.back()) == 1) {</div>
 <div class="line">                    transitPrimitive = <span class="keyword">true</span>;</div>
 <div class="line">                }</div>
 <div class="line">            }</div>
 <div class="line">        }</div>
 <div class="line"> </div>
-<div class="line">        <span class="comment">// iterate through commanding various primitives</span></div>
+<div class="line">        <span class="comment">// Iterate through commanding various primitives</span></div>
 <div class="line">        <span class="keywordflow">if</span> (transitPrimitive) {</div>
 <div class="line">            <span class="keywordflow">switch</span> (ptIndex) {</div>
 <div class="line">                <span class="keywordflow">case</span> 0: {</div>
-<div class="line">                    <span class="comment">// (1) go home</span></div>
-<div class="line">                    <span class="comment">// all parameters of the &quot;Home&quot; primitive are optional, thus</span></div>
-<div class="line">                    <span class="comment">// we can skip the parameters and the default values will be</span></div>
-<div class="line">                    <span class="comment">// used</span></div>
+<div class="line">                    <span class="comment">// (1) Go home, all parameters of the &quot;Home&quot; primitive are</span></div>
+<div class="line">                    <span class="comment">// optional, thus we can skip the parameters and the default</span></div>
+<div class="line">                    <span class="comment">// values will be used</span></div>
 <div class="line">                    robot-&gt;executePrimitive(<span class="stringliteral">&quot;Home()&quot;</span>);</div>
 <div class="line"> </div>
-<div class="line">                    <span class="comment">// execute the next primitive</span></div>
+<div class="line">                    <span class="comment">// Execute the next primitive</span></div>
 <div class="line">                    ptIndex++;</div>
 <div class="line"> </div>
 <div class="line">                    <span class="keywordflow">break</span>;</div>
 <div class="line">                }</div>
 <div class="line">                <span class="keywordflow">case</span> 1: {</div>
-<div class="line">                    <span class="comment">// (2) move TCP to point A in task space w.r.t world (base)</span></div>
-<div class="line">                    <span class="comment">// frame the mandatory parameter &quot;target&quot; requires 8 values:</span></div>
-<div class="line">                    <span class="comment">// [x y z roll pitch yaw reference_frame reference_point]</span></div>
+<div class="line">                    <span class="comment">// (2) Move TCP to point A in world (base) frame. The</span></div>
+<div class="line">                    <span class="comment">// mandatory parameter &quot;target&quot; requires 8 values: [x y z</span></div>
+<div class="line">                    <span class="comment">// roll pitch yaw reference_frame reference_point]</span></div>
 <div class="line">                    <span class="comment">// unit: meters and degrees</span></div>
 <div class="line">                    robot-&gt;executePrimitive(</div>
 <div class="line">                        <span class="stringliteral">&quot;MoveL(target=0.387 -0.11 0.203 90.0 0.0 180.0 WORLD &quot;</span></div>
 <div class="line">                        <span class="stringliteral">&quot;WORLD_ORIGIN)&quot;</span>);</div>
 <div class="line"> </div>
-<div class="line">                    <span class="comment">// execute the next primitive</span></div>
+<div class="line">                    <span class="comment">// Execute the next primitive</span></div>
 <div class="line">                    ptIndex++;</div>
 <div class="line"> </div>
 <div class="line">                    <span class="keywordflow">break</span>;</div>
 <div class="line">                }</div>
 <div class="line">                <span class="keywordflow">case</span> 2: {</div>
-<div class="line">                    <span class="comment">// (3) move TCP to point B in task space w.r.t world (base)</span></div>
-<div class="line">                    <span class="comment">// frame the mandatory parameter &quot;target&quot; requires 8 values:</span></div>
-<div class="line">                    <span class="comment">// [x y z roll pitch yaw reference_frame reference_point]</span></div>
-<div class="line">                    <span class="comment">// unit: meters and degrees</span></div>
+<div class="line">                    <span class="comment">// (3) Move TCP to point B in world (base) frame</span></div>
 <div class="line">                    robot-&gt;executePrimitive(</div>
 <div class="line">                        <span class="stringliteral">&quot;MoveL(target=0.687 0.1 0.264 180.0 0.0 180.0 WORLD &quot;</span></div>
 <div class="line">                        <span class="stringliteral">&quot;WORLD_ORIGIN)&quot;</span>);</div>
 <div class="line"> </div>
-<div class="line">                    <span class="comment">// execute the next primitive</span></div>
+<div class="line">                    <span class="comment">// Execute the next primitive</span></div>
 <div class="line">                    ptIndex++;</div>
 <div class="line"> </div>
 <div class="line">                    <span class="keywordflow">break</span>;</div>
 <div class="line">                }</div>
 <div class="line">                <span class="keywordflow">case</span> 3: {</div>
-<div class="line">                    <span class="comment">// (4) move TCP to point C in task space w.r.t world (base)</span></div>
-<div class="line">                    <span class="comment">// frame the mandatory parameter &quot;target&quot; requires 8 values:</span></div>
-<div class="line">                    <span class="comment">// [x y z roll pitch yaw reference_frame reference_point]</span></div>
-<div class="line">                    <span class="comment">// unit: meters and degrees</span></div>
+<div class="line">                    <span class="comment">// (4) Move TCP to point C in world (base) frame</span></div>
 <div class="line">                    robot-&gt;executePrimitive(</div>
 <div class="line">                        <span class="stringliteral">&quot;MoveL(target=0.387 0.5 0.1 -90.0 0.0 180.0 WORLD &quot;</span></div>
 <div class="line">                        <span class="stringliteral">&quot;WORLD_ORIGIN)&quot;</span>);</div>
 <div class="line"> </div>
-<div class="line">                    <span class="comment">// execute the next primitive</span></div>
+<div class="line">                    <span class="comment">// Execute the next primitive</span></div>
 <div class="line">                    ptIndex++;</div>
 <div class="line">                    <span class="keywordflow">break</span>;</div>
 <div class="line">                }</div>
 <div class="line">                <span class="keywordflow">case</span> 4: {</div>
-<div class="line">                    <span class="comment">// (4) move TCP to point C in task space w.r.t world (base)</span></div>
-<div class="line">                    <span class="comment">// frame the mandatory parameter &quot;target&quot; requires 8 values:</span></div>
-<div class="line">                    <span class="comment">// [x y z roll pitch yaw reference_frame reference_point]</span></div>
-<div class="line">                    <span class="comment">// unit: meters and degrees</span></div>
+<div class="line">                    <span class="comment">// (5) Move TCP to point D in world (base) frame</span></div>
 <div class="line">                    robot-&gt;executePrimitive(</div>
 <div class="line">                        <span class="stringliteral">&quot;MoveL(target=0.5 0.0 0.3 180.0 0.0 180.0 WORLD &quot;</span></div>
 <div class="line">                        <span class="stringliteral">&quot;WORLD_ORIGIN)&quot;</span>);</div>
 <div class="line"> </div>
-<div class="line">                    <span class="comment">// execute the next primitive</span></div>
+<div class="line">                    <span class="comment">// Execute the next primitive</span></div>
 <div class="line">                    ptIndex++;</div>
 <div class="line">                    <span class="keywordflow">break</span>;</div>
 <div class="line">                }</div>
 <div class="line">                <span class="keywordflow">case</span> 5: {</div>
-<div class="line">                    <span class="comment">// repeat the moves</span></div>
+<div class="line">                    <span class="comment">// Repeat the moves</span></div>
 <div class="line">                    ptIndex = 0;</div>
 <div class="line"> </div>
 <div class="line">                    <span class="keywordflow">break</span>;</div>
@@ -224,12 +213,12 @@ $(function() {
 <div class="line">            }</div>
 <div class="line">        }</div>
 <div class="line"> </div>
-<div class="line">        <span class="comment">// print each state in the primitive states string list</span></div>
+<div class="line">        <span class="comment">// Print each state in the primitive states string list</span></div>
 <div class="line">        <span class="keywordflow">if</span> (k_printPtStates) {</div>
 <div class="line">            <span class="keywordflow">for</span> (<span class="keyword">const</span> <span class="keyword">auto</span>&amp; state : systemStatus.<a class="code" href="structflexiv_1_1_system_status.html#a592cd9b2ba4cdfbbc36208373cc360e8">m_ptStates</a>) {</div>
 <div class="line">                std::cout &lt;&lt; state &lt;&lt; std::endl;</div>
 <div class="line">            }</div>
-<div class="line">            <span class="comment">// empty line</span></div>
+<div class="line">            <span class="comment">// Empty line</span></div>
 <div class="line">            std::cout &lt;&lt; std::endl;</div>
 <div class="line">        }</div>
 <div class="line">    }</div>
@@ -237,12 +226,12 @@ $(function() {
 <div class="line"> </div>
 <div class="line"><span class="keywordtype">int</span> main(<span class="keywordtype">int</span> argc, <span class="keywordtype">char</span>* argv[])</div>
 <div class="line">{</div>
-<div class="line">    <span class="comment">// log object for printing message with timestamp and coloring</span></div>
+<div class="line">    <span class="comment">// Log object for printing message with timestamp and coloring</span></div>
 <div class="line">    <a class="code" href="classflexiv_1_1_log.html">flexiv::Log</a> log;</div>
 <div class="line"> </div>
 <div class="line">    <span class="comment">// Parse Parameters</span></div>
 <div class="line">    <span class="comment">//=============================================================================</span></div>
-<div class="line">    <span class="comment">// check if program has 3 arguments</span></div>
+<div class="line">    <span class="comment">// Check if program has 3 arguments</span></div>
 <div class="line">    <span class="keywordflow">if</span> (argc != 3) {</div>
 <div class="line">        log.<a class="code" href="classflexiv_1_1_log.html#ac2e9a784da1b98c85ba1d5f29f0bb2c4">error</a>(<span class="stringliteral">&quot;Invalid program arguments. Usage: &lt;robot_ip&gt; &lt;local_ip&gt;&quot;</span>);</div>
 <div class="line">        <span class="keywordflow">return</span> 0;</div>
@@ -258,43 +247,43 @@ $(function() {
 <div class="line">    <span class="comment">// RDK robot client</span></div>
 <div class="line">    <span class="keyword">auto</span> robot = std::make_shared&lt;flexiv::Robot&gt;();</div>
 <div class="line"> </div>
-<div class="line">    <span class="comment">// create data struct for storing robot states</span></div>
+<div class="line">    <span class="comment">// Create data struct for storing robot states</span></div>
 <div class="line">    <span class="keyword">auto</span> robotStates = std::make_shared&lt;flexiv::RobotStates&gt;();</div>
 <div class="line"> </div>
-<div class="line">    <span class="comment">// initialize robot interface and connect to the robot server</span></div>
+<div class="line">    <span class="comment">// Initialize robot interface and connect to the robot server</span></div>
 <div class="line">    robot-&gt;init(robotIP, localIP);</div>
 <div class="line"> </div>
-<div class="line">    <span class="comment">// wait for the connection to be established</span></div>
+<div class="line">    <span class="comment">// Wait for the connection to be established</span></div>
 <div class="line">    <span class="keywordflow">do</span> {</div>
 <div class="line">        std::this_thread::sleep_for(std::chrono::milliseconds(1));</div>
 <div class="line">    } <span class="keywordflow">while</span> (!robot-&gt;isConnected());</div>
 <div class="line"> </div>
-<div class="line">    <span class="comment">// enable the robot, make sure the E-stop is released before enabling</span></div>
+<div class="line">    <span class="comment">// Enable the robot, make sure the E-stop is released before enabling</span></div>
 <div class="line">    <span class="keywordflow">if</span> (robot-&gt;enable()) {</div>
 <div class="line">        log.<a name="a4"></a><a class="code" href="classflexiv_1_1_log.html#aa49e1b267d12e57ac625105aa8be7ecb">info</a>(<span class="stringliteral">&quot;Enabling robot ...&quot;</span>);</div>
 <div class="line">    }</div>
 <div class="line"> </div>
-<div class="line">    <span class="comment">// wait for the robot to become operational</span></div>
+<div class="line">    <span class="comment">// Wait for the robot to become operational</span></div>
 <div class="line">    <span class="keywordflow">do</span> {</div>
 <div class="line">        std::this_thread::sleep_for(std::chrono::milliseconds(1));</div>
 <div class="line">    } <span class="keywordflow">while</span> (!robot-&gt;isOperational());</div>
 <div class="line">    log.<a class="code" href="classflexiv_1_1_log.html#aa49e1b267d12e57ac625105aa8be7ecb">info</a>(<span class="stringliteral">&quot;Robot is now operational&quot;</span>);</div>
 <div class="line"> </div>
-<div class="line">    <span class="comment">// set mode after robot is operational</span></div>
+<div class="line">    <span class="comment">// Set mode after robot is operational</span></div>
 <div class="line">    robot-&gt;setMode(<a name="a5"></a>flexiv::MODE_PRIMITIVE_EXECUTION);</div>
 <div class="line"> </div>
-<div class="line">    <span class="comment">// wait for the mode to be switched</span></div>
+<div class="line">    <span class="comment">// Wait for the mode to be switched</span></div>
 <div class="line">    <span class="keywordflow">do</span> {</div>
 <div class="line">        std::this_thread::sleep_for(std::chrono::milliseconds(1));</div>
 <div class="line">    } <span class="keywordflow">while</span> (robot-&gt;getMode() != flexiv::MODE_PRIMITIVE_EXECUTION);</div>
 <div class="line"> </div>
 <div class="line">    <span class="comment">// Low-priority Background Tasks</span></div>
 <div class="line">    <span class="comment">//=============================================================================</span></div>
-<div class="line">    <span class="comment">// use std::thread for some non-realtime tasks, not joining</span></div>
+<div class="line">    <span class="comment">// Use std::thread for some non-realtime tasks, not joining</span></div>
 <div class="line">    <span class="comment">// (non-blocking)</span></div>
 <div class="line">    std::thread lowPriorityThread(std::bind(primitiveStateMachine, robot));</div>
 <div class="line"> </div>
-<div class="line">    <span class="comment">// block main thread</span></div>
+<div class="line">    <span class="comment">// Block main thread</span></div>
 <div class="line">    lowPriorityThread.join();</div>
 <div class="line"> </div>
 <div class="line">    <span class="keywordflow">return</span> 0;</div>

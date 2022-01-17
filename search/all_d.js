@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['update_90',['update',['../classflexiv_1_1_visualization.html#acb5b5443de642ed605850f7bf882c5d1',1,'flexiv::Visualization']]],
-  ['updatemodel_91',['updateModel',['../classflexiv_1_1_model.html#ad0544a580703ea19d946d7de3cea7c03',1,'flexiv::Model']]]
+  ['visualization_96',['Visualization',['../classflexiv_1_1_visualization.html',1,'flexiv']]],
+  ['visualization_2ehpp_97',['Visualization.hpp',['../_visualization_8hpp.html',1,'']]]
 ];
